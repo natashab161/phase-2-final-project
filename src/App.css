@@ -5,5 +5,9 @@
 .navBar {
   list-style-type: none; /* Removes the bullet point */
   display: flex;
-  justify-content: space-between; /* adds equal spacing between each <li> element */
+  justify-content: space-between; /*equal spacing between each <li> element */
+}
+
+.navBar li {
+  margin: 5px; /*adds spacing between each <li> element */
 }

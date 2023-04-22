@@ -1,8 +1,15 @@
 import React from "react";
 
+
 function Home(){
     return(
-        <div></div>
+        <div>
+            {/* <h1> */}
+            {/* Featured Events */}
+            {/* Search */}
+            {/* Map */}
+
+        </div>
     )
 }
 
