@@ -2,7 +2,11 @@ import React from "react";
 
 function About() {
     return (
-        <div></div>
+        <div>
+            {/* about our brand */}
+            {/* Who we are */}
+            {/* about this website */}
+        </div>
     )
 }
 
