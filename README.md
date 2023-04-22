@@ -1,4 +1,14 @@
-# Getting Started with Create React App
+#PullUp
+
+ This is the first iteration of our application, pullUp
+
+
+
+
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
