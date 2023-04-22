@@ -8,8 +8,8 @@ import About from "./About";
 function NavBar () {
     return (
         <div>
-          <nav className="navBar">
-            <ul>
+          <nav>
+            <ul className="navBar">
                 <li> 
                     <Link to='/'>home</Link> 
                 </li>
