@@ -1,6 +1,5 @@
 import React from "react";
 
-
 function Home(){
     return(
         <div>
@@ -8,7 +7,6 @@ function Home(){
             {/* Featured Events */}
             {/* Search */}
             {/* Map */}
-
         </div>
     )
 }
