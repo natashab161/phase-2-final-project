@@ -4,9 +4,9 @@ function Home(){
     return(
         <div>
             {/* <h1> */}
-            {/* Featured Events */}
-            {/* Search */}
-            {/* Map */}
+            {/* <FeaturedEvents /> */}
+            {/* Search & Map can be nested here or within the EventsPage*/}
+            {/* Footer */}
         </div>
     )
 }
