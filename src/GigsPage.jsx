@@ -1,11 +1,10 @@
 import React from "react";
 
-function NavBar () {
-    return (
+function GigsPage() {
+    return(
         <div>
-
         </div>
     )
 }
 
-export default NavBar
+export default GigsPage;

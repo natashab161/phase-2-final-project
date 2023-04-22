@@ -1,0 +1,10 @@
+# This is like  a read.me but for our personal use of logging anything notworthy
+
+
+# NavBar.jsx 
+    - when working in NavBar I tried using  <Switch/> as a parent element  to <Routes>
+    - because  <Switch/> is benefical for scalability
+    - Without <Switch> all matching routes would be rendered, which may lead to unexpected behavior or errors
+    - ie: if the route is /users/`${username}, switch makes sure that the user gets to their route instead of another similar one
+    - BUT i  am getting an error using <Switch/> likely because we are not on react v6
+    - I'm pretty sure  we're on v5 because of how Flatiron set us up
