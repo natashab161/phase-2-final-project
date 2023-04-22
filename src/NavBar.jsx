@@ -23,6 +23,7 @@ function NavBar () {
                     <Link to='/About'>about</Link>
                 </li>
             </ul>
+                
           </nav>
             <Routes>
                 <Route path="/" element={<Home />}/>
