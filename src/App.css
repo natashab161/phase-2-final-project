@@ -29,25 +29,16 @@
 }
 
 .eventCard {
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	padding: 3rem;
-	width: 90%;
-	max-width: 300px;
-	background-color: #1b2028;
-	border-radius: 16px;
-	position: relative;
-	border: 3px solid transparent;
-	background-clip: padding-box;
-	text-align: center;
-	color: #f1f3f3;
-	background-image: linear-gradient(
-		135deg,
-		rgba(#752e7c, 0.35),
-		rgba(#734a58, 0.1) 15%,
-		#1b2028 20%,
-		#1b2028 100%
-	);
-
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 40%
 }
+
+.eventCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.eventTextContainter {
+  box-shadow: 2px  16px;
+}
+
