@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { app, auth } from "./Firebase";
 import * as firebaseui from "firebaseui";
-import { EmailAuthProvider } from "firebase/auth";
+import { EmailAuthProvider, GoogleAuthProvider } from "firebase/auth";
 import "firebaseui/dist/firebaseui.css";
 
 const FirebaseAuth = () => {
@@ -12,6 +12,10 @@ const FirebaseAuth = () => {
       const uiConfig = {
         signInOptions: [
           EmailAuthProvider.PROVIDER_ID,
+          {
+            provider: GoogleAuthProvider.PROVIDER_ID,
+            clientId: "737390277278-e65basbmigp2304kvg76e5o4nt1d6mdj.apps.googleusercontent.com"
+          }
           // Add more providers as needed
         ],
         // Other config options...
