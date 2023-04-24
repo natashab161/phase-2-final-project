@@ -4,10 +4,33 @@
 
 .navBar {
   list-style-type: none; /* Removes the bullet point */
-  display: flex;
   justify-content: space-between; /*equal spacing between each <li> element */
+  align-items: center;
+  padding: .1px;
+  display: flex;
+  padding: 10px;
+  border: 1px solid black;
+  width: 100%;
 }
 
+
 .navBar li {
-  margin: 5px; /*adds spacing between each <li> element */
+  margin: 0 5px;
 }
+
+@media screen and (max-width: 768px) {
+  .navBar {
+    flex-direction: row;
+    align-items: flex-start;
+  }
+  
+  .navBar li {
+    margin: 5px 0;
+  }
+}
+
+
+
+
+
+
