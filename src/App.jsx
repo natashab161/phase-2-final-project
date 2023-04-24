@@ -6,6 +6,7 @@ import Login from "./Login";
 import "./App.css";
 import NavBar from "./NavBar";
 import FirebaseAuth from "./FirebaseAuth";
+import UserStatus from "./UserStatus";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -23,6 +24,7 @@ function App() {
   return (
     <div className="App">
       <NavBar />
+      <UserStatus />
       <FirebaseAuth />
     </div>
   );
