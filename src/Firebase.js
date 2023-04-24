@@ -1,6 +1,8 @@
 // src/firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
+import firebase from "firebase/app";
+import "firebase/auth";
 import * as firebaseui from "firebaseui";
 
 const firebaseConfig = {
@@ -13,20 +15,25 @@ const firebaseConfig = {
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
-// Initialize Firebase
-const app = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-
-// FirebaseUI configuration
-const uiConfig = {
-  signInFlow: "popup",
-  signInOptions: [GoogleAuthProvider.PROVIDER_ID],
-  callbacks: {
-    signInSuccessWithAuthResult: () => false,
-  },
-};
-
-// Initialize FirebaseUI instance
+const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
-const ui = new firebaseui.auth.AuthUI(auth);
 
-export { app, ui, uiConfig };
+export { app, auth };
+
+// // Initialize Firebase
+// const firebase = !getApps().length ? initializeApp(firebaseConfig) : getApp();
+
+// // FirebaseUI configuration
+// const uiConfig = {
+//   signInFlow: "popup",
+//   signInOptions: [GoogleAuthProvider.PROVIDER_ID],
+//   callbacks: {
+//     signInSuccessWithAuthResult: () => false,
+//   },
+// };
+
+// // Initialize FirebaseUI instance
+// const auth = getAuth(firebase);
+// const ui = new firebaseui.auth.AuthUI(auth);
+
+// export { firebase, ui, uiConfig };
