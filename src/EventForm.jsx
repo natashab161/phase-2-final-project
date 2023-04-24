@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 
+  /* look into how to make certain forms required */
+    /* and code for drop downs */
+
 function EventForm({ eventSubmit }){
     const [title, setTitle] = useState("");
     const [street1, setStreet1] = useState("");
