@@ -19,3 +19,40 @@ To hit our MVP the main categories we'll focus on:
  * it would be nice to have an error page so for anything we aren't able to finish, it still goes somewhere and looks complete
  * we can create tailored 404 pages for each category, gigs, community, etc
  * that can be a good  way to try out some animations  while still having a complete site
+
+
+ Template for Event Card Data:
+
+ {
+    "id": 0,
+    "user": "",
+    "artform" : ["", ""],
+    "thumbnail": ,
+    "title": ,
+    "artist": "",
+    "location": {
+        "street": ,
+        "street 2": "",
+        "city":  ,
+        "state": ,
+        "zip":  ,
+        "neighborhood":
+
+            } ,
+    "venue": ,
+    "calendar": {
+        "time": "0:00 PM EST",
+        "date": "00/00/2023",
+        "day": "Someday"
+    },
+    "price":
+    "tickets": ,
+    "share": ,
+    "images": ,
+    "description": ,
+    "age": ,
+    "category": ,
+    "subcategory": ,
+    "tags": ,
+    "collaborators": 
+}
