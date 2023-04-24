@@ -13,7 +13,6 @@
   width: 100%;
 }
 
-
 .navBar li {
   margin: 0 5px;
 }
@@ -29,8 +28,28 @@
   }
 }
 
+.eventCard {
+  margin: 2%;
+	box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  border: none;
+  /* there is something blocking border-radius from rounding all 4 boarders */
+  border-radius: 25px;
+  width: 40%
+}
 
+.eventCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+  
+}
 
+.eventThumbnail {
+  width: 100%;
+  border-radius: 25px;
+}
 
-
+.eventTextContainter {
+  box-shadow: 2px  16px;
+  padding: 1%
+}
 
