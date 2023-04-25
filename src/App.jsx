@@ -1,45 +1,75 @@
 import React from "react";
-import { Link, Route, Routes } from 'react-router-dom';
+import { app, auth } from "./Firebase";
+import { Link, Route, Routes } from "react-router-dom";
+import "./App.css";
+import NavBar from "./NavBar";
+import UserStatus from "./UserStatus";
+import UserLocationsMap from "./UserLocationsMap";
+import UploadPhotoForm from "./UploadPhotoForm";
+import PersonalPhotos from "./PersonalPhotos";
+import FirebaseAuth from "./FirebaseAuth";
+import { functions } from "./Firebase";
+import PhotoGallery from "./PhotoGallery";
+import VideoUploadForm from "./VideoUploadForm";
+import ChatGPT from "./ChatGPT";
+import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import Community from "./Community";
 import GigsPage from "./GigsPage";
 import About from "./About";
 import Create from "./Create";
 
-
 function App() {
- return (
-  <div className="App">
-    <div>
-          <nav>
-            <ul className="navBar">
-                <li> 
-                    <Link to='/'>home</Link> 
-                </li>
-                <li> 
-                    <Link to='/Community'>community</Link>
-                </li>
-                <li>
-                    <Link to='/GigsPage'>gigs</Link>
-                </li>
-                <li> 
-                    <Link to='/About'>about</Link>
-                </li>
-                <li> 
-                    <Link to='/Create'>create</Link>
-                </li>
-            </ul>
-                
-          </nav>
-            <Routes>
-                <Route path="/" element={<Home />}/>
-                <Route path="/Community" element={<Community />}/>
-                <Route path="/GigsPage" element={<GigsPage />}/>
-                <Route path="/About" element={<About />}/>
-                <Route path="/Create" element={<Create />}/>
-            </Routes>
-        </div>
-  </div>
- );
+  const [user, setUser] = React.useState(null);
+
+  React.useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  return (
+    <div className="App">
+      <NavBar>
+        <ul className="navBar">
+          <li>
+            <Link to="/">home</Link>
+          </li>
+          <li>
+            <Link to="/Community">community</Link>
+          </li>
+          <li>
+            <Link to="/GigsPage">gigs</Link>
+          </li>
+          <li>
+            <Link to="/About">about</Link>
+          </li>
+          <li>
+            <Link to="/Create">create</Link>
+          </li>
+        </ul>
+      </NavBar>
+      <UserStatus />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/Community" element={<Community />} />
+        <Route path="/GigsPage" element={<GigsPage />} />
+        <Route path="/About" element={<About />} />
+        <Route path="/Create" element={<Create />} />
+      </Routes>
+      <UploadPhotoForm />
+      <UserLocationsMap />
+      <VideoUploadForm />
+      <ChatGPT />
+      <ProfilePage />
+      <PhotoGallery />
+      {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
+    </div>
+  );
 }
+
 export default App;
