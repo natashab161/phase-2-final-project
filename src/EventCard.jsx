@@ -28,5 +28,4 @@ function EventCard({ event }) {
          
     )
 };
-
 export default EventCard;

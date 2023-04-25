@@ -24,5 +24,4 @@ function EventsPage() {
         </div>
       );
 }
-
 export default EventsPage;
