@@ -21,21 +21,3 @@ const auth = getAuth(app);
 const functions = getFunctions(app);
 
 export { app, auth, functions };
-
-// // Initialize Firebase
-// const firebase = !getApps().length ? initializeApp(firebaseConfig) : getApp();
-
-// // FirebaseUI configuration
-// const uiConfig = {
-//   signInFlow: "popup",
-//   signInOptions: [GoogleAuthProvider.PROVIDER_ID],
-//   callbacks: {
-//     signInSuccessWithAuthResult: () => false,
-//   },
-// };
-
-// // Initialize FirebaseUI instance
-// const auth = getAuth(firebase);
-// const ui = new firebaseui.auth.AuthUI(auth);
-
-// export { firebase, ui, uiConfig };

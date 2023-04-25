@@ -1,6 +1,6 @@
+
 import React, { useState, useEffect } from "react";
 import { GoogleMap, Marker, useLoadScript } from "@react-google-maps/api";
-import { getAuth } from "firebase/auth";
 import { getDatabase, ref, onValue } from "firebase/database";
 import { Client } from "@googlemaps/google-maps-services-js";
 
@@ -18,7 +18,6 @@ const UserLocationsMap = () => {
   const [center, setCenter] = useState(defaultCenter);
 
   useEffect(() => {
-    const auth = getAuth();
     const db = getDatabase();
 
     const fetchLocations = async () => {
@@ -87,3 +86,4 @@ const UserLocationsMap = () => {
 };
 
 export default UserLocationsMap;
+

@@ -14,6 +14,8 @@ import {
 import { updateProfile } from 'firebase/auth';
 import './ProfilePage.css';
 import { app, auth } from './Firebase';
+import UserInfo from './UserInfo';
+import EditDisplayName from './EditDisplayName';
 
 const storage = getStorage(app);
 const db = getFirestore(app);
@@ -76,6 +78,9 @@ function ProfilePage() {
   return (
     <div className="profile-page">
       <h1>Welcome, {currentUser.displayName}</h1>
+      <EditDisplayName user={currentUser} />
+
+      {/* <UserInfo user={currentUser} /> */}
       <div className="profile-info">
         <img src={url} alt="profile" className="profile-picture" />
         <input type="file" onChange={handleChange} />

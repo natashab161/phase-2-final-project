@@ -34,6 +34,7 @@ function App() {
       <UserStatus />
       <UploadPhotoForm />
       <UserLocationsMap />
+      <VideoUploadForm />
       <ChatGPT />
       <ProfilePage />
       <PhotoGallery />
