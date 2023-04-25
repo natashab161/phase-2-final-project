@@ -11,6 +11,7 @@ function Community () {
             {/* FeaturedBlogs "post-grad" we should discuss the types of text formats that  we'll have*/}
             {/* BlogPosts */}
             {/* BlogPost */}
+            {/* BlogSubmit */}
             {/* Channels */}
         </div>
     )
