@@ -12,6 +12,7 @@ import { functions } from './Firebase';
 import PhotoGallery from './PhotoGallery';
 import VideoUploadForm from "./VideoUploadForm";
 import ChatGPT from "./ChatGPT";
+import ProfilePage from './ProfilePage';
 
 
 function App() {
@@ -34,6 +35,7 @@ function App() {
       <UploadPhotoForm />
       <UserLocationsMap />
       <ChatGPT />
+      <ProfilePage />
       <PhotoGallery />
       {user ? (
         <PersonalPhotos user={user} />
