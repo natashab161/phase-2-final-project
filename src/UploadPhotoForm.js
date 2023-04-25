@@ -7,6 +7,8 @@ import {
   updateMetadata,
 } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
+import './UploadPhotoForm.css'
+
 
 const UploadPhotoForm = () => {
   const [files, setFiles] = useState([]);
@@ -54,7 +56,7 @@ const UploadPhotoForm = () => {
   };
 
   return (
-    <form onSubmit={handleUpload}>
+    <form onSubmit={handleUpload} className="upload-photo-form">
       <input type="file" multiple onChange={handleFileChange} />
       <button type="submit" disabled={loading}>
         {loading ? 'Uploading...' : 'Upload'}

@@ -1,19 +1,61 @@
-.profilePage {
+  /* ProfilePage.css */
+
+.profile-page {
     display: flex;
     flex-direction: column;
     align-items: center;
+    font-family: Arial, sans-serif;
+    max-width: 700px;
+    margin: 0 auto;
+    padding: 2rem;
   }
   
-  .profilePage__avatar {
-    width: 150px;
-    height: 150px;
-    border-radius: 50%;
+  .profile-page h1,
+  .profile-page h3 {
+    margin-bottom: 1rem;
+  }
+  
+  .profile-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2rem;
+  }
+  
+  .profile-picture {
+    width: 100px;
+    height: 100px;
     object-fit: cover;
+    border-radius: 50%;
+    margin-bottom: 1rem;
   }
   
-  .profilePage__bio {
+  .profile-info input[type="file"] {
+    margin-bottom: 1rem;
+  }
+  
+  .bio-section {
+    display: flex;
+    flex-direction: column;
     width: 100%;
-    min-height: 100px;
-    resize: none;
+    margin-bottom: 2rem;
+  }
+  
+  .bio-input {
+    width: 100%;
+    margin-bottom: 1rem;
+    resize: vertical;
+  }
+  
+  .edit-display-name {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .edit-display-name input[type="text"] {
+    width: 100%;
+    margin-bottom: 1rem;
   }
   
