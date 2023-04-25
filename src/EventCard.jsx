@@ -1,6 +1,8 @@
-import React, {useState} from "react";
+import React from "react";
+
 function EventCard({ event }) {
   console.log(event)
+
   return (
     <div className="eventCard">
       <img className="eventThumbnail"
