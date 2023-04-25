@@ -1,18 +1,8 @@
 {
-  "functions": [
+  "function": [
     {
       "source": "functions",
       "codebase": "default"
-    },
-    {
-      "source": "cloudfunctions",
-      "codebase": "cloudfunctions",
-      "ignore": [
-        "node_modules",
-        ".git",
-        "firebase-debug.log",
-        "firebase-debug.*.log"
-      ]
     }
   ],
   "database": {
