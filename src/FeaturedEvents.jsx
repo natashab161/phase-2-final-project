@@ -5,7 +5,7 @@ function FeaturedEvents() {
     return(
         <div>
             <h2 className="featuredHeader">featured events from our top artists</h2>
-            <EventCard />
+            {/* <EventCard /> */}
         </div>
     )
 }
