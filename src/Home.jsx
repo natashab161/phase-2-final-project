@@ -1,4 +1,5 @@
 import React from "react";
+import EventsPage from "./EventsPage";
 
 function Home(){
     return(
@@ -7,6 +8,7 @@ function Home(){
             {/* <FeaturedEvents /> */}
             {/* Search & Map can be nested here or within the EventsPage*/}
             {/* Footer */}
+            <EventsPage />
         </div>
     )
 }
