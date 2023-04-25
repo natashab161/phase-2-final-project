@@ -1,0 +1,19 @@
+.profilePage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .profilePage__avatar {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .profilePage__bio {
+    width: 100%;
+    min-height: 100px;
+    resize: none;
+  }
+  
