@@ -1,17 +1,16 @@
 import React from "react";
 import EventsPage from "./EventsPage";
-import CarouselHeader from "./CarouselHeader";
+import SearchEvents from "./SearchEvents";
 
 function Home(){
     return(
         <div>
-            <img src="./media/tester-logo.png">
-            </img>
+            <img src="./media/tester-logo.png"></img>
             <h1>
                 the place to be for local artists and art-lovers to connect and grow
             </h1>
             {/* <FeaturedEvents /> */}
-            {/* Search & Map can be nested here or within the EventsPage*/}
+            <SearchEvents />
             <EventsPage />
             {/* Footer */}
         </div>
