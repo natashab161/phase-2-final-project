@@ -1,9 +1,6 @@
-import React, {useState} from "react";
+import React from "react";
 
-function EventCard({ event }) {
-
-    console.log(event)
-    
+function EventCard() {
     return (
         <div className="eventCard">
             <img className="eventThumbnail" 
@@ -22,9 +19,7 @@ function EventCard({ event }) {
             {/* useState and onClick to use the save button */}
             {/* route to 'links' for tickets, for the MVP this route can exsist and go to  a styled  404 */}
             {/* */}
-            
         </div>
-         
     )
 };
 
