@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import EventForm from "./EventForm";
 
 function Create () {
     return (
@@ -7,6 +8,7 @@ function Create () {
             {/* if user logged-in, show <EventForm/> */}
             {/* if user NOT logged-in show <SignUp> */}
             {/* <Create>  will route  to <SignUp> */}
+            <EventForm />
 
         </div>
     )

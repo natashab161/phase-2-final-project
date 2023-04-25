@@ -4,6 +4,7 @@ import Home from "./Home";
 import Community from "./Community";
 import GigsPage from "./GigsPage";
 import About from "./About";
+import Create from "./Create";
 
 function NavBar () {
     return (
@@ -22,6 +23,9 @@ function NavBar () {
                 <li> 
                     <Link to='/About'>about</Link>
                 </li>
+                <li> 
+                    <Link to='/Create'>create</Link>
+                </li>
             </ul>
                 
           </nav>
@@ -30,6 +34,7 @@ function NavBar () {
                 <Route path="/Community" element={<Community />}/>
                 <Route path="/GigsPage" element={<GigsPage />}/>
                 <Route path="/About" element={<About />}/>
+                <Route path="/Create" element={<Create />}/>
             </Routes>
         </div>
     )
