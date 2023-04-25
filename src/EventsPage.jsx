@@ -2,7 +2,7 @@ import React, {useState, useEffect} from "react";
 import EventCard from "./EventCard";
 
 function EventsPage() {
-
+  
   const [events, setEvents] = useState([])
 
   useEffect(() => {
