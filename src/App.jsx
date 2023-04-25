@@ -6,6 +6,7 @@ import GigsPage from "./GigsPage";
 import About from "./About";
 import Create from "./Create";
 
+
 function App() {
  return (
   <div className="App">
@@ -38,7 +39,6 @@ function App() {
                 <Route path="/Create" element={<Create />}/>
             </Routes>
         </div>
-
   </div>
  );
 }
