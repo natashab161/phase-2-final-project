@@ -7,7 +7,7 @@ import {
   updateMetadata,
 } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
-import './UploadPhotoForm.css'
+
 
 
 const UploadPhotoForm = () => {
