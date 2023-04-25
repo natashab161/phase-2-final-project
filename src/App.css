@@ -26,6 +26,22 @@
   .navBar li {
     margin: 5px 0;
   }
+  .carousel {
+    overflow: hidden;
+  }
+  
+  .inner {
+    white-space: nowrap;
+    transition: transform 0.3s;
+  }
+  
+  .carousel-item {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+  }
+
 }
 
 .eventCard {
@@ -35,7 +51,7 @@
   border: none;
   /* there is something blocking border-radius from rounding all 4 boarders */
   border-radius: 25px;
-  width: 40%
+  width: 25%
 }
 
 .eventCard:hover {

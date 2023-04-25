@@ -9,7 +9,7 @@ function EventCard({ event }) {
             />
 
             <div className="eventTextContainter">
-              <h3 className="eventTitle">{/*event.title*/}</h3>  
+              <h3 className="eventTitle">{/* event.title */}</h3>  
                     <div className="eventSubHeader"> 
                         <p>this is an example of an event image, delete once json data is in</p>
                         {/* these wont all have be h4, play around with the visual hierarchy later */}
