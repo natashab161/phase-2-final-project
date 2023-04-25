@@ -2,7 +2,6 @@ import React from "react";
 import { app, auth } from "./Firebase";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
-import NavBar from "./NavBar";
 import UserStatus from "./UserStatus";
 import UserLocationsMap from "./UserLocationsMap";
 import UploadPhotoForm from "./UploadPhotoForm";
@@ -34,7 +33,7 @@ function App() {
 
   return (
     <div className="App">
-      <NavBar>
+      <nav>
         <ul className="navBar">
           <li>
             <Link to="/">home</Link>
@@ -52,7 +51,7 @@ function App() {
             <Link to="/Create">create</Link>
           </li>
         </ul>
-      </NavBar>
+      </nav>
       <UserStatus />
       <Routes>
         <Route path="/" element={<Home />} />
