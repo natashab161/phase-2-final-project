@@ -3,7 +3,7 @@ import { app, auth } from "./Firebase";
 import { Link, Route, Routes } from "react-router-dom";
 import "./App.css";
 import UserStatus from "./UserStatus";
-import UserLocationsMap from "./UserLocationsMap";
+// import UserLocationsMap from "./UserLocationsMap";
 import UploadPhotoForm from "./UploadPhotoForm";
 import PersonalPhotos from "./PersonalPhotos";
 import FirebaseAuth from "./FirebaseAuth";
@@ -17,6 +17,7 @@ import Community from "./Community";
 import GigsPage from "./GigsPage";
 import About from "./About";
 import Create from "./Create";
+import EventMap from "./EventMap";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -61,7 +62,7 @@ function App() {
         <Route path="/Create" element={<Create />} />
       </Routes>
       <UploadPhotoForm />
-      <UserLocationsMap />
+      <EventMap />
       <VideoUploadForm />
       <ChatGPT />
       <ProfilePage />
