@@ -1,6 +1,12 @@
 {
   "function": [
     {
+      "source": "function",
+      "codebase": "default"
+    }
+  ],
+  "functions": [
+    {
       "source": "functions",
       "codebase": "default"
     }
