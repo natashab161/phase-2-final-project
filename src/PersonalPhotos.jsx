@@ -5,6 +5,7 @@ import {
   listAll,
   getMetadata,
   deleteObject,
+  getDownloadURL,
 } from 'firebase/storage';
 import { getAuth } from 'firebase/auth';
 
@@ -24,7 +25,7 @@ const PersonalPhotos = () => {
       for (const itemRef of listResult.items) {
         const metadata = await getMetadata(itemRef);
         if (metadata.customMetadata && metadata.customMetadata.uploadedBy === currentUserUid) {
-          const photoUrl = await itemRef.getDownloadURL();
+          const photoUrl = await getDownloadURL(itemRef);
           personalPhotos.push({ url: photoUrl, ref: itemRef });
         }
       }
