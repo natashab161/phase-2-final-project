@@ -1,5 +1,6 @@
 .searchbar {
   height: 96px;
+  align-items: center;
 }
 
 input[type="text"] {

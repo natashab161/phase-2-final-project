@@ -39,6 +39,18 @@ body {
   }
 }
 
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.slide {
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
 event-container{
   display: flex;
 }
