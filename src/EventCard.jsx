@@ -24,8 +24,7 @@ function EventCard({ event }) {
             {/* route to 'links' for tickets, for the MVP this route can exsist and go to  a styled  404 */}
             {/* */}
             
-        </div>
-         
+        </div>      
     )
 };
 export default EventCard;
