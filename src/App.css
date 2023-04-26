@@ -45,10 +45,30 @@ body {
   max-width: 500px;
 }
 
+.slideshowSlider {
+  white-space: nowrap;
+}
+
 .slide {
+  display: inline-block;
   height: 400px;
   width: 100%;
   border-radius: 40px;
+}
+
+/* Butttons */
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width:  20px;
+  border-radius: 50%;
+  cursor: pointer;
+  margin: 15px 7px 0px;
+  background-color: #c4c4c4;
 }
 
 event-container{
