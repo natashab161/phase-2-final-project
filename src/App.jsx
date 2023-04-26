@@ -7,7 +7,8 @@ import UserStatus from "./UserStatus";
 import UploadPhotoForm from "./UploadPhotoForm";
 import PersonalPhotos from "./PersonalPhotos";
 import FirebaseAuth from "./FirebaseAuth";
-import { functions } from "./Firebase";
+// import { functions } from "./Firebase";
+import { getFunctions } from 'firebase/functions'
 import PhotoGallery from "./PhotoGallery";
 import VideoUploadForm from "./VideoUploadForm";
 import ChatGPT from "./ChatGPT";
@@ -18,6 +19,10 @@ import GigsPage from "./GigsPage";
 import About from "./About";
 import Create from "./Create";
 import EventMap from "./EventMap";
+import GoogleAnalytics from './GoogleAnalytics';
+
+
+// import Dialogflow from "./DialogFlow";
 
 function App() {
   const [user, setUser] = React.useState(null);
@@ -62,11 +67,13 @@ function App() {
         <Route path="/Create" element={<Create />} />
       </Routes>
       <UploadPhotoForm />
+      {/* <Dialogflow /> */}
       <EventMap />
       <VideoUploadForm />
       <ChatGPT />
       <ProfilePage />
       <PhotoGallery />
+      <GoogleAnalytics />
       {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
     </div>
   );
