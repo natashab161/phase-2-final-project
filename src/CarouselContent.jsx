@@ -1,5 +1,5 @@
 import React from "react";
-import Carousel, { CarouselItem } from "./Carousel";
+import Carousel, { CarouselItem } from "./Carousel2";
 
 const Slide = ({ number }) => (
   <div>
@@ -7,7 +7,7 @@ const Slide = ({ number }) => (
   </div>
 );
 
-function CarouselHeader() {
+function CarouselContent() {
   return (
     <Carousel>
       <CarouselItem>
@@ -35,4 +35,4 @@ function CarouselHeader() {
   );
 }
 
-export default CarouselHeader;
+export default CarouselContent;
