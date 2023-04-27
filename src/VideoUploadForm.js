@@ -32,27 +32,18 @@ const VideoUploadForm = () => {
       // Create a storage reference with the user's uid and the file name
       const storageRef = ref(storage, `users/${user.uid}/${file.name}`);
 
-      // Upload the file to Firebase Cloud Storage
-      const uploadTask = uploadBytes(storageRef, file);
+      try {
+        // Upload the file to Firebase Cloud Storage
+        const snapshot = await uploadBytes(storageRef, file, { contentType: file.type });
 
-      // Listen for state changes, errors, and completion of the upload.
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          // Get the upload progress as a percentage
-          const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-          setProgress(progress);
-        },
-        (error) => {
-          console.log(error);
-          setError("An error occurred while uploading the file. Please try again.");
-        },
-        () => {
-          // Upload complete, reset state
-          setFile(null);
-          setProgress(0);
-        }
-      );
+        // Upload complete, reset state
+        setFile(null);
+        setProgress(0);
+      } catch (error) {
+        console.log(error);
+        setError("An error occurred while uploading the file. Please try again.");
+      }
+
     } else {
       setError("Please select a video file (mp4, avi, mov).");
     }

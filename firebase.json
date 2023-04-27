@@ -1,13 +1,13 @@
 {
-  "function": [
-    {
-      "source": "function",
-      "codebase": "default"
-    }
-  ],
   "functions": [
     {
       "source": "functions",
+      "codebase": "default"
+    }
+  ],
+  "uploadImageMetadata": [
+    {
+      "source": "uploadImageMetadata",
       "codebase": "default"
     }
   ],
