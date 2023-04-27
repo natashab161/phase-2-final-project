@@ -11,18 +11,16 @@ import FirebaseAuth from "./FirebaseAuth";
 import { getFunctions } from 'firebase/functions'
 import PhotoGallery from "./PhotoGallery";
 import VideoUploadForm from "./VideoUploadForm";
-import ChatGPT from "./ChatGPT";
+// import ChatGPT from "./ChatGPT";
 import ProfilePage from "./ProfilePage";
 import Home from "./Home";
 import Community from "./Community";
 import GigsPage from "./GigsPage";
 import About from "./About";
 import Create from "./Create";
-import EventMap from "./EventMap";
+import EventsMap from "./EventsMap";
 import GoogleAnalytics from './GoogleAnalytics';
 // import PhotoMetadataVisualization from "./PhotoMetadataVisualization";
-import { Profiler } from 'react';
-
 
 // import Dialogflow from "./DialogFlow";
 
@@ -70,10 +68,10 @@ function App() {
       </Routes>
       <UploadPhotoForm />
       {/* <Dialogflow /> */}
-      <EventMap />
+      <EventsMap />
       <VideoUploadForm />
-      <ChatGPT />
-     { /* {/* <ProfilePage /> */} 
+      {/* <ChatGPT /> */}
+      {/* <ProfilePage /> */}
       <PhotoGallery />
       {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
