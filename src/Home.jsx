@@ -1,5 +1,5 @@
 import React from "react";
-import Slideshow from "./Slideshow";
+import Slideshow from "./Slideshow.jsx"
 import EventsPage from "./EventsPage";
 import SearchEvents from "./SearchEvents";
 import FeaturedEvents from "./FeaturedEvents";

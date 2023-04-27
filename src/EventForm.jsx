@@ -51,7 +51,25 @@ function EventForm({ eventSubmit }){
             description: description,
             collaborators:collaborators,
             tags: tags,  
-        }
+        };
+
+      fetch('/eventsdata.json', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEvent),
+      })
+
+      .then(response => response.json())
+      .then(data => {
+        eventSubmit(data);
+      })
+      .catch((error)  =>  {
+        console.error('Error:', error);
+      })
+
+  
     }
 
     return(
@@ -63,6 +81,7 @@ function EventForm({ eventSubmit }){
                 type="text"
                 placeholder="Title your event"
                 value={title}
+                required
             ></input>
              <input
                 onChange={(e) => setStreet1(e.target.value)}
@@ -81,18 +100,21 @@ function EventForm({ eventSubmit }){
                 type="text"
                 placeholder="City"
                 value={city}
+                required
             ></input>
             <input
                 onChange={(e) => setState(e.target.value)}
                 type="text"
                 placeholder="State" /* should state be a  drop down? */
                 value={state}
+                required
             ></input>
             <input
                 onChange={(e) => setZipCode(e.target.value)}
                 type="number"
                 placeholder="Zip code"
                 value={zipCode}
+                required
             ></input>
              <input
                 onChange={(e) => setNeightborhood(e.target.value)}
@@ -105,6 +127,7 @@ function EventForm({ eventSubmit }){
                 type="text"
                 placeholder="Wya? Add the venue name here"
                 value={venue}
+                required
             ></input>
             {/* this one might need to be altered based on the built in calander feature */}
              <input
@@ -112,12 +135,14 @@ function EventForm({ eventSubmit }){
                 type="number"
                 placeholder="Calander date"
                 value={date}
+                required
             ></input>
             <input
                 onChange={(e) => setTime(e.target.value)}
                 type="number"
                 placeholder="Time" /*this should probably be drop down to avoid user errors */
                 value="time"
+                required
             ></input>
                <input
                 onChange={(e) => setTickets(e.target.value)}
@@ -130,12 +155,14 @@ function EventForm({ eventSubmit }){
                 type="number"
                 placeholder="Is your  event 18+, 21+ or all ages?" /* this should be a drop down, again to prevent user errors */
                 value={age}
+                required
             ></input>
                <input
                 onChange={(e) => setPrice(e.target.value)}
                 type="number"
                 placeholder="$$$"
                 value={price}
+                required
             ></input>
                <input
                 onChange={(e) => setThumbnail(e.target.value)}
@@ -154,6 +181,7 @@ function EventForm({ eventSubmit }){
                 type="text"
                 placeholder="Categories"
                 value={category}
+                required
             ></input>
             <input
                 onChange={(e) => setSubcategory(e.target.value)}
@@ -179,11 +207,14 @@ function EventForm({ eventSubmit }){
                 placeholder="Any other " 
                 value={tags}
             ></input>
+            <br />
+            <button type="submit">Create Event</button>
             
 
            </form>
         </div>
     )
 }
+
 
 export default EventForm;
