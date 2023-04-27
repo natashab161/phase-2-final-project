@@ -1,0 +1,68 @@
+.video-upload-form {
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    width: 500px;
+  }
+  
+  .video-upload-form p {
+    margin: 0;
+    padding: 0;
+  }
+  
+  .video-upload-form ul {
+    margin: 0;
+    padding: 0 0 0 20px;
+    list-style: none;
+  }
+  
+  .video-upload-form input[type="file"] {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    background-color: white;
+    font-size: 16px;
+    color: black;
+  }
+  
+  .video-upload-form button[type="submit"] {
+    margin: 20px 0;
+    padding: 10px;
+    border: 1px solid lightgrey;
+    border-radius: 5px;
+    background-color: #fc5185;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+  }
+  
+  .video-upload-form button[type="submit"]:hover {
+    transform: scale(1.05);
+    background-color: #fc0055;
+  }
+  
+  .video-upload-form button[type="submit"]:disabled {
+    background-color: lightgrey;
+    cursor: not-allowed;
+  }
+  
+  .video-upload-form .error {
+    color: red;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .video-upload-form .progress {
+    margin: 10px 0 0;
+    padding: 0;
+    font-size: 14px;
+    color: #6c757d;
+  }
+  

@@ -71,8 +71,9 @@ function App() {
       <EventsMap />
       <VideoUploadForm />
       {/* <ChatGPT /> */}
-      <ProfilePage />
+      <ProfilePage />      
       <PhotoGallery />
+    
       {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
       {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
