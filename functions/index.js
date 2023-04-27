@@ -1,4 +1,3 @@
-// Import the required libraries and initialize the Firebase app
 const functions = require('firebase-functions');
 const admin = require('firebase-admin');
 const { Storage } = require('@google-cloud/storage');
@@ -10,294 +9,526 @@ const sharp = require('sharp');
 
 admin.initializeApp();
 
-// Create a new storage bucket
 const storage = new Storage();
 
 const srcBucketName = 'pullupnyc.appspot.com';
-const faceDstBucketName = 'cloud-vision-faces-bucket';
-const labelDstBucketName = 'cloud-vision-labels-bucket';
-const objectDstBucketName = 'cloud-vision-objects-bucket';
-
 const srcBucket = storage.bucket(srcBucketName);
-const faceDstBucket = storage.bucket(faceDstBucketName);
-const labelDstBucket = storage.bucket(labelDstBucketName);
-const objectDstBucket = storage.bucket(objectDstBucketName);
 
-// detectFaces function
 exports.detectFaces = functions.storage.object().onFinalize(async (object) => {
   const filePath = object.name;
-const bucketDir = path.dirname(filePath);
-const fileName = path.basename(filePath);
-const fileExtension = path.extname(fileName);
-const tempFilePath = path.join(os.tmpdir(), fileName);
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
 
-// Download the image to a temporary directory
-await srcBucket.file(filePath).download({
-  destination: tempFilePath,
-});
-
-// Analyze the image using Cloud Vision API to detect faces
-const client = new ImageAnnotatorClient();
-const [result] = await client.faceDetection(tempFilePath);
-const faces = result.faceAnnotations;
-
-// Check if the image has any faces
-if (faces.length > 0) {
-  const promises = faces.map(async (face, index) => {
-    const vertices = face.boundingPoly.vertices;
-    const x = vertices[0].x;
-    const y = vertices[0].y;
-    const width = vertices[2].x - x;
-    const height = vertices[2].y - y;
-
-    // Crop the face from the original image
-    const faceFileName = `${path.basename(fileName, fileExtension)}_face${index}${fileExtension}`;
-    const faceTempFilePath = path.join(os.tmpdir(), faceFileName);
-    await sharp(tempFilePath)
-      .extract({ left: x, top: y, width, height })
-      .toFile(faceTempFilePath);
-
-    // Upload the cropped face to the new bucket
-    const newFilePath = path.join(bucketDir, 'faces', faceFileName);
-    await faceDstBucket.upload(faceTempFilePath, {
-      destination: newFilePath,
-      metadata: {
-        contentType: object.contentType,
-      },
-    });
-
-    // Delete the temporary face file
-    fs.unlinkSync(faceTempFilePath);
-    console.log(`Face ${index + 1} from ${fileName} uploaded to ${faceDstBucketName}.`);
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
   });
 
-  // Wait for all cropped face uploads to complete
-  await Promise.all(promises);
-} else {
-  console.log(`Image ${fileName} does not contain any faces.`);
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.faceDetection(tempFilePath);
+  const faces = result.faceAnnotations;
+
+  const metadata = {
+    metadata: {
+      faceCount: String(faces.length),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Image ${fileName} has ${faces.length} face(s).`);
+
+  fs.unlinkSync(tempFilePath);
+});
+
+exports.uploadToFirebase = functions.storage.object().onFinalize(async (object) => {
+  try {
+    const filePath = object.name;
+    const fileName = path.basename(filePath);
+    const metadata = object.metadata;
+    const uid = object.metadata && object.metadata.uid;
+
+    if (metadata) {
+      const imageUrl = `gs://${srcBucketName}/${fileName}`;
+      const metadataObj = {
+        imageUrl,
+        uid,
+        metadata,
+      };
+      await admin.database().ref('photos').push(metadataObj);
+      console.log(`Image metadata added to Firebase Realtime Database`);
+    } else {
+      console.error(`No metadata found in the event.`);
+    }
+  } catch (error) {
+    console.error(`Error uploading data to Firebase: ${error}`);
+  }
+});
+
+exports.landmarkDetection = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
+
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
+  });
+
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.landmarkDetection(tempFilePath);
+  const landmarks = result.landmarkAnnotations.map((landmark) => ({
+    description: landmark.description,
+    score: landmark.score.toFixed(2),
+    locations: landmark.locations.map((location) => ({
+      latitude: location.latLng.latitude,
+      longitude: location.latLng.longitude,
+    })),
+  }));
+
+  const metadata = {
+    metadata: {
+      landmarks: JSON.stringify(landmarks),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Landmarks detected in ${fileName}:`);
+  landmarks.forEach((landmark) => {
+    console.log(`- ${landmark.description} (${landmark.score})`);
+  });
+
+  fs.unlinkSync(tempFilePath);
+});
+
+exports.logoDetection = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
+
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
+  });
+
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.logoDetection(tempFilePath);
+  const logos = result.logoAnnotations.map((logo) => ({
+    description: logo.description,
+    score: logo.score.toFixed(2),
+  }));
+
+  const metadata = {
+    metadata: {
+      logos: JSON.stringify(logos),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Logos detected in ${fileName}:`);
+  logos.forEach((logo) => {
+    console.log(`- ${logo.description} (${logo.score})`);
+  });
+
+  fs.unlinkSync(tempFilePath);
+});
+
+exports.objectLocalization = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
+
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
+  });
+
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.objectLocalization(tempFilePath);
+  const objects = result.localizedObjectAnnotations.map((object) => ({
+    name: object.name,
+    score: object.score.toFixed(2),
+    locations: object.boundingPoly.normalizedVertices.map((vertex) => ({
+      x: vertex.x,
+      y: vertex.y,
+    })),
+  }));
+
+  const metadata = {
+    metadata: {
+      objects: JSON.stringify(objects),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Objects detected in ${fileName}:`);
+  objects.forEach((object) => {
+    console.log(`- ${object.name} (${object.score})`);
+  });
+
+  fs.unlinkSync(tempFilePath);
+});
+
+exports.webDetection = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
+
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
+  });
+
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.webDetection(tempFilePath);
+  const webDetection = result.webDetection;
+
+  const entities = webDetection.webEntities.map((entity) => ({
+    entityId: entity.entityId,
+    description: entity.description,
+    score: entity.score.toFixed(2),
+  }));
+
+  const pages = webDetection.pagesWithMatchingImages.map((page) => ({
+    url: page.url,
+    score: page.score.toFixed(2),
+  }));
+
+  const metadata = {
+    metadata: {
+      webEntities: JSON.stringify(entities),
+      pagesWithMatchingImages: JSON.stringify(pages),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Web entities and pages detected in ${fileName}:`);
+  entities.forEach((entity) => {
+    console.log(`- ${entity.description} (${entity.score})`);
+  });
+  pages.forEach((page) => {
+    console.log(`- ${page.url} (${page.score})`);
+  });
+
+  fs.unlinkSync(tempFilePath);
+});
+
+const { BigQuery } = require('@google-cloud/bigquery');
+const projectId = process.env.GCP_PROJECT_ID;
+const keyFilename = process.env.GCP_KEY_FILENAME;
+
+const bigquery = new BigQuery({ projectId, keyFilename });
+
+const schema = [
+  { name: 'image_url', type: 'STRING' },
+  { name: 'type', type: 'STRING' },
+  { name: 'description', type: 'STRING' },
+  { name: 'score', type: 'FLOAT' },
+];
+
+const datasetName = 'photo_video_metadata';
+const tableName = 'photo_metadata';
+
+function uploadImageMetadata(imageUrl, metadata) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const rows = [];
+
+      if (metadata.labels) {
+        const labels = JSON.parse(metadata.labels);
+        for (const label of labels) {
+          rows.push({
+            image_url: imageUrl,
+            type: 'label',
+            description: label,
+            score: null,
+          });
+        }
+      }
+
+      if (metadata.objects) {
+        const objects = JSON.parse(metadata.objects);
+        for (const object of objects) {
+          rows.push({
+            image_url: imageUrl,
+            type: 'object',
+            description: object.name,
+            score: parseFloat(object.score),
+          });
+        }
+      }
+
+      if (metadata.faces) {
+        const faces = JSON.parse(metadata.faces);
+        for (let i = 0; i < faces; i++) {
+          rows.push({
+            image_url: imageUrl,
+            type: 'face',
+            description: `face_${i + 1}`,
+            score: null,
+          });
+        }
+      }
+
+      if (rows.length > 0) {
+        await bigquery
+          .dataset(datasetName)
+          .table(tableName)
+          .insert(rows, { schema });
+
+        console.log(`Data uploaded to BigQuery table ${tableName}`);
+      }
+
+      resolve();
+    } catch (error) {
+      console.error(`Error uploading data to BigQuery: ${error}`);
+      reject(error);
+    }
+  });
 }
 
-// Delete the temporary file
-fs.unlinkSync(tempFilePath);
+exports.syncPhotoMetadata = functions.database
+  .ref('/photo_metadata/{photoId}')
+  .onWrite(async (change, context) => {
+    const { photoId } = context.params;
 
-});
+    if (!change.after.exists()) {
+      console.log(`Photo metadata with ID ${photoId} deleted.`);
+      return null;
+    }
 
-// labelDetection function
+    const { imageUrl, metadata } = change.after.val();
+
+    try {
+      await uploadImageMetadata(imageUrl, metadata);
+    } catch (error) {
+      console.error(`Error syncing photo metadata with ID ${photoId}: ${error}`);
+    }
+
+    console.log(`Photo metadata with ID ${photoId} synced with BigQuery.`);
+  });
+
+  
 exports.labelDetection = functions.storage.object().onFinalize(async (object) => {
-  // const filePath = object.name;
-const bucketDir = path.dirname(filePath);
-const fileName = path.basename(filePath);
-const fileExtension = path.extname(fileName);
-const tempFilePath = path.join(os.tmpdir(), fileName);
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
 
-// Download the image to a temporary directory
-await srcBucket.file(filePath).download({
-  destination: tempFilePath,
+  await srcBucket.file(filePath).download({
+    destination: tempFilePath,
+  });
+
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.labelDetection(tempFilePath);
+  const labels = result.labelAnnotations.map(label => label.description);
+
+  const metadata = {
+    metadata: {
+      labels: JSON.stringify(labels),
+    },
+  };
+
+  await srcBucket.file(filePath).setMetadata(metadata);
+
+  console.log(`Image ${fileName} has labels added.`);
+
+  fs.unlinkSync(tempFilePath);
 });
 
-// Analyze the image using Cloud Vision API to detect labels
-const client = new ImageAnnotatorClient();
-const [result] = await client.labelDetection(tempFilePath);
-const labels = result.labelAnnotations.map(label => label.description);
-
-// Add labels to the image metadata
-const metadata = {
-  contentType: object.contentType,
-  metadata: {
-    labels: JSON.stringify(labels),
-  },
-};
-
-// Upload the image with the new metadata to the new bucket
-const newFilePath = path.join(bucketDir, 'labeled', fileName);
-await labelDstBucket.upload(tempFilePath, {
-  destination: newFilePath,
-  metadata: metadata,
-});
-
-console.log(`Image ${fileName} with labels added uploaded to ${labelDstBucketName}.`);
-
-// Delete the temporary file
-fs.unlinkSync(tempFilePath);
-
-});
-
-// Initialize the Cloud Vision client
-const visionClient = new ImageAnnotatorClient();
-
-// Add the objectDetection function to your existing functions
 exports.objectDetection = functions.storage.object().onFinalize(async (object) => {
   const filePath = object.name;
   const fileName = path.basename(filePath);
   const tempFilePath = path.join(os.tmpdir(), fileName);
 
-  // Download the image to a temporary directory
   await srcBucket.file(filePath).download({
     destination: tempFilePath,
   });
 
-  // Perform object detection using the Vision API
-  const [result] = await visionClient.objectLocalization(tempFilePath);
+  const client = new ImageAnnotatorClient();
+  const [result] = await client.objectLocalization(tempFilePath);
   const objects = result.localizedObjectAnnotations;
 
-  // Process the objects and create a metadata object
   const objectData = objects.map((object) => {
     return { name: object.name, score: object.score.toFixed(2) };
   });
+
   const metadata = {
     metadata: {
       objects: JSON.stringify(objectData),
     },
   };
 
-  // Upload the image with new metadata to the destination bucket
-  await objectDstBucket.upload(tempFilePath, {
-    destination: filePath,
-    metadata: metadata,
-  });
+  await srcBucket.file(filePath).setMetadata(metadata);
 
-  // Log the objects
   console.log(`Objects detected in ${fileName}:`);
   objects.forEach((object) => {
     console.log(`- ${object.name} (${object.score.toFixed(2)})`);
   });
 
-  // Delete the temporary file
   fs.unlinkSync(tempFilePath);
 });
 
-// Export the bucket names for use in other components
-exports.faceBucketName = faceDstBucketName;
-exports.labelBucketName = labelDstBucketName;
-exports.objectBucketName = objectDstBucketName;
 
+const bq = new BigQuery({ projectId, keyFilename });
 
-// // Import the required libraries and initialize the Firebase app
-// const functions = require('firebase-functions');
-// const admin = require('firebase-admin');
-// const { Storage } = require('@google-cloud/storage');
-// const { ImageAnnotatorClient } = require('@google-cloud/vision');
-// const os = require('os');
-// const path = require('path');
-// const fs = require('fs');
-// const sharp = require('sharp');
+const schema2 = [
+  { name: 'image_url', type: 'STRING' },
+  { name: 'type', type: 'STRING' },
+  { name: 'description', type: 'STRING' },
+  { name: 'score', type: 'FLOAT' },
+];
 
-// admin.initializeApp();
+const datasetName2 = 'photo_video_metadata';
+const tableName2 = 'photo_metadata';
 
-// // Create a new storage bucket
-// const storage = new Storage();
+async function uploadImageMetadata(file) {
+  try {
+    const imageUrl = `gs://${file.bucket}/${file.name}`;
+    const metadata = file.metadata;
 
-// const srcBucketName = 'pullupnyc.appspot.com';
-// const faceDstBucketName = 'cloud-vision-faces-bucket';
-// const labelDstBucketName = 'cloud-vision-labels-bucket';
+    const rows = [];
 
-// const srcBucket = storage.bucket(srcBucketName);
-// const faceDstBucket = storage.bucket(faceDstBucketName);
-// const labelDstBucket = storage.bucket(labelDstBucketName);
+    if (metadata.labels) {
+      const labels = JSON.parse(metadata.labels);
+      for (const label of labels) {
+        rows.push({
+          image_url: imageUrl,
+          type: 'label',
+          description: label,
+          score: null,
+        });
+      }
+    }
 
-// // Create a function that listens to changes in the 'images' directory for face detection
-// exports.detectFaces = functions.storage.object().onFinalize(async (object) => {
-//   const filePath = object.name;
-// const bucketDir = path.dirname(filePath);
-// const fileName = path.basename(filePath);
-// const fileExtension = path.extname(fileName);
-// const tempFilePath = path.join(os.tmpdir(), fileName);
+    if (metadata.objects) {
+      const objects = JSON.parse(metadata.objects);
+      for (const object of objects) {
+        rows.push({
+          image_url: imageUrl,
+          type: 'object',
+          description: object.name,
+          score: parseFloat(object.score),
+        });
+      }
+    }
 
-// // Download the image to a temporary directory
-// await srcBucket.file(filePath).download({
-//   destination: tempFilePath,
-// });
+    if (metadata.faces) {
+      const faces = JSON.parse(metadata.faces);
+      for (let i = 0; i < faces; i++) {
+        rows.push({
+          image_url: imageUrl,
+          type: 'face',
+          description: `face_${i + 1}`,
+          score: null,
+        });
+      }
+    }
 
-// // Analyze the image using Cloud Vision API to detect faces
-// const client = new ImageAnnotatorClient();
-// const [result] = await client.faceDetection(tempFilePath);
-// const faces = result.faceAnnotations;
+    if (rows.length > 0) {
+      await bigquery
+        .dataset(datasetName2)
+        .table(tableName2)
+        .insert(rows, { schema });
 
-// // Check if the image has any faces
-// if (faces.length > 0) {
-//   const promises = faces.map(async (face, index) => {
-//     const vertices = face.boundingPoly.vertices;
-//     const x = vertices[0].x;
-//     const y = vertices[0].y;
-//     const width = vertices[2].x - x;
-//     const height = vertices[2].y - y;
+      console.log(`Data uploaded to BigQuery table ${tableName}`);
+    }
+  } catch (error) {
+    console.error(`Error uploading data to BigQuery: ${error}`);
+  }
+}
 
-//     // Crop the face from the original image
-//     const faceFileName = `${path.basename(fileName, fileExtension)}_face${index}${fileExtension}`;
-//     const faceTempFilePath = path.join(os.tmpdir(), faceFileName);
-//     await sharp(tempFilePath)
-//       .extract({ left: x, top: y, width, height })
-//       .toFile(faceTempFilePath);
+exports.handlePhotoMetadata = async (event, context) => {
+  const { name: fileName, bucket: bucketName, metadata } = event;
 
-//     // Upload the cropped face to the new bucket
-//     const newFilePath = path.join(bucketDir, 'faces', faceFileName);
-//     await faceDstBucket.upload(faceTempFilePath, {
-//       destination: newFilePath,
-//       metadata: {
-//         contentType: object.contentType,
-//       },
-//     });
+  if (metadata) {
+    const { photoId } = metadata;
+    const imageUrl = `gs://${bucketName}/${fileName}`;
+    const metadataRef = admin.database().ref(`photo_metadata/${photoId}`);
+    
+    metadataRef.set({ imageUrl, ...metadata }, (error) => {
+      if (error) {
+        console.error(`Error syncing photo metadata to Realtime Database: ${error}`);
+      } else {
+        console.log(`Photo metadata for ${photoId} synced to Realtime Database.`);
+      }
+    });
+    
+    await uploadImageMetadata({ bucket: bucketName, name: fileName, metadata });
+  } else {
+    console.error('No metadata found in the event.');
+  }
+};
 
-//     // Delete the temporary face file
-//     fs.unlinkSync(faceTempFilePath);
-//     console.log(`Face ${index + 1} from ${fileName} uploaded to ${faceDstBucketName}.`);
-//   });
+exports.countMenWomenInImage = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = path.basename(filePath);
+  const tempFilePath = path.join(os.tmpdir(), fileName);
 
-//   // Wait for all cropped face uploads to complete
-//   await Promise.all(promises);
-// } else {
-//   console.log(`Image ${fileName} does not contain any faces.`);
-// }
+  await storage.bucket(object.bucket).file(filePath).download({
+    destination: tempFilePath,
+  });
 
-// // Delete the temporary file
-// fs.unlinkSync(tempFilePath);
+  const [result] = await client.faceDetection(tempFilePath);
+  const faces = result.faceAnnotations;
 
-// });
+  let numMen = 0;
+  let numWomen = 0;
 
-// // Initialize the Cloud Vision client
-// const visionClient = new ImageAnnotatorClient();
+  faces.forEach((face) => {
+    const isMale = face.genderLikelihood === 'MALE';
+    if (isMale) {
+      numMen++;
+    } else {
+      numWomen++;
+    }
+  });
 
-// // Add the labelDetection function to your existing functions
-// exports.labelDetection = functions.storage.object().onFinalize(async (object) => {
-//   const filePath = object.name;
-//   const fileName = path.basename(filePath);
-//   const tempFilePath = path.join(os.tmpdir(), fileName);
+  const metadata = {
+    metadata: {
+      numMen,
+      numWomen,
+    },
+  };
 
-//   // Download the image to a temporary directory
-//   await srcBucket.file(filePath).download({
-//     destination: tempFilePath,
-//   });
+  await storage.bucket(object.bucket).file(filePath).setMetadata(metadata);
 
-//   // Perform label detection using the Vision API
-//   const [result] = await visionClient.labelDetection(tempFilePath);
-//   const labels = result.labelAnnotations;
+  console.log(`Number of men and women detected in ${fileName}:`);
+  console.log(`- Men: ${numMen}`);
+  console.log(`- Women: ${numWomen}`);
 
-//   // Process the labels and create a metadata object
-//   const labelData = labels.map((label) => {
-//     return { description: label.description, score: label.score.toFixed(2) };
-//   });
-//   const metadata = {
-//     metadata: {
-//       labels: JSON.stringify(labelData),
-//     },
-//   };
+  fs.unlinkSync(tempFilePath);
+});
 
-//   // Upload the image with new metadata to the destination bucket
-//   await labelDstBucket.upload(tempFilePath, {
-//     destination: filePath,
-//     metadata: metadata,
-//   });
+exports.detectEthnicity = functions.storage.object().onFinalize(async (object) => {
+  const filePath = object.name;
+  const fileName = filePath.split('/').pop();
+  const tempFilePath = `/tmp/${fileName}`;
 
-//   // Log the labels
-//   console.log(`Labels detected in ${fileName}:`);
-//   labels.forEach((label) => {
-//     console.log(`- ${label.description} (${label.score.toFixed(2)})`);
-//   });
+  // Download file from bucket
+  await storage.bucket(object.bucket).file(filePath).download({ destination: tempFilePath });
+  console.log(`Image ${fileName} downloaded locally to ${tempFilePath}`);
 
-//   // Delete the temporary file
-//   fs.unlinkSync(tempFilePath);
-// });
+  // Detect faces in the image
+  const [result] = await vision.faceDetection(tempFilePath);
+  const faces = result.faceAnnotations;
 
-// // Export the bucket names for use in other components
-// exports.faceBucketName = faceDstBucketName;
-// exports.labelBucketName = labelDstBucketName;
+  console.log(`Found ${faces.length} face${faces.length === 1 ? '' : 's'} in ${fileName}`);
+
+  // Extract ethnicity information from the face annotations
+  const ethnicityData = faces.map((face) => {
+    const { likelihood } = face.underExposedLikelihood === 'VERY_UNLIKELY' && face.overExposedLikelihood === 'VERY_UNLIKELY' ? face.dominantColors.colors[0] : {};
+
+    return { ethnicity: face.attributes.find(attr => attr.name === 'ETHNICITY').value, confidence: face.attributes.find(attr => attr.name === 'ETHNICITY').confidence, skinColorLikelihood: likelihood };
+  });
+
+  // Set metadata with ethnicity information
+  await storage.bucket(object.bucket).file(filePath).setMetadata({
+    metadata: {
+      ethnicityData: JSON.stringify(ethnicityData)
+    }
+  });
+  console.log(`Metadata updated for ${fileName}`);
+
+  // Delete local file
+  fs.unlinkSync(tempFilePath);
+});
+
