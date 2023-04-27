@@ -34,7 +34,7 @@ function Slideshow() {
                 >
                 <div className="slide">
                     {imageSlides.map((backgroundImage, index) => (
-                        <div className="slide" key={index} style={{backgroundImage}} /> 
+                        <div className="slide" key={index} style={{backgroundImage: `url(${backgroundImage})`}} />
                     ))}
                 </div>
                 <div className="slideshowDots">
