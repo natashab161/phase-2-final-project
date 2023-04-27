@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { getAuth } from "firebase/auth";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
+import "./VideoUploadForm.css";
 
 const VideoUploadForm = () => {
   const [file, setFile] = useState(null);
@@ -50,13 +51,24 @@ const VideoUploadForm = () => {
   };
 
   return (
-    <form onSubmit={handleUpload}>
-      <input type="file" onChange={handleFileInputChange} />
-      {error && <p>{error}</p>}
-      {progress > 0 && <p>Uploading {progress.toFixed(0)}%</p>}
-      <button type="submit" disabled={!file}>
-        Upload
-      </button>
+    <form className="video-upload-form" onSubmit={handleUpload}>
+      <p className="video-upload-form__label">Please select a video file (mp4, avi, mov) to upload for your event.</p>
+      <p className="video-upload-form__label">Tips:</p>
+      <ul className="video-upload-form__tips">
+        <li>Make sure the video is clear and not blurry</li>
+        <li>Record the video in landscape mode for best viewing experience</li>
+        <li>Keep the video under 10 minutes long to keep your audience engaged</li>
+      </ul>
+      <div className="video-upload-form__upload-wrapper">
+        <label htmlFor="file-upload" className="video-upload-form__file-upload-button">
+          Choose File
+        </label>
+        <input type="file" id="file-upload" onChange={handleFileInputChange} />
+        <button type="submit" className="video-upload-form__submit-button" disabled={!file}>
+          {progress > 0 ? `Uploading ${progress.toFixed(0)}%` : "Upload"}
+        </button>
+      </div>
+      {error && <p className="video-upload-form__error">{error}</p>}
     </form>
   );
 };
