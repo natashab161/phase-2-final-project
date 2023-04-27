@@ -10,6 +10,7 @@ import {
   getFirestore,
   doc,
   updateDoc,
+  getDoc,
 } from 'firebase/firestore';
 import { updateProfile } from 'firebase/auth';
 import './ProfilePage.css';
@@ -26,12 +27,12 @@ function ProfilePage() {
   const [bio, setBio] = useState('');
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
-  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (currentUser && currentUser.photoURL) {
       setUrl(currentUser.photoURL);
     }
+    fetchBio();
   }, [currentUser]);
 
   const handleChange = (e) => {
@@ -44,7 +45,6 @@ function ProfilePage() {
     if (!image) {
       return;
     }
-    setUploading(true);
     const storageRef = ref(storage, `images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -56,7 +56,6 @@ function ProfilePage() {
       (error) => {
         // error function ...
         console.log(error);
-        setUploading(false);
       },
       async () => {
         // complete function ...
@@ -65,7 +64,6 @@ function ProfilePage() {
         await updateProfile(currentUser, {
           photoURL: downloadURL,
         });
-        setUploading(false);
       }
     );
   };
@@ -75,6 +73,19 @@ function ProfilePage() {
     await updateDoc(userDocRef, {
       bio,
     });
+  };
+
+  const fetchBio = async () => {
+    if (!currentUser.uid) {
+      return;
+    }
+
+    const docRef = doc(db, 'users', currentUser.uid);
+    const docSnap = await getDoc(docRef);
+
+    if (docSnap.exists()) {
+      setBio(docSnap.data().bio);
+    }
   };
 
   if (!currentUser) {
@@ -91,9 +102,7 @@ function ProfilePage() {
       <div className="profile-info">
         <img src={url} alt="profile" className="profile-picture" />
         <input type="file" onChange={handleChange} />
-        <button onClick={handleUpload} disabled={uploading}>
-          {uploading ? 'Uploading...' : 'Upload Profile Picture'}
-        </button>
+        <button onClick={handleUpload}>Upload Profile Picture</button>
       </div>
       <div className="bio-section">
         <h3>Bio</h3>
@@ -111,3 +120,116 @@ function ProfilePage() {
 }
 
 export default ProfilePage;
+
+// import React, { useState, useEffect } from 'react';
+// import { useNavigate } from 'react-router-dom';
+// import {
+//   getStorage,
+//   ref,
+//   uploadBytesResumable,
+//   getDownloadURL,
+// } from 'firebase/storage';
+// import {
+//   getFirestore,
+//   doc,
+//   updateDoc,
+// } from 'firebase/firestore';
+// import { updateProfile } from 'firebase/auth';
+// import './ProfilePage.css';
+// import { app, auth } from './Firebase';
+// import EditDisplayName from './EditDisplayName';
+
+// const storage = getStorage(app);
+// const db = getFirestore(app);
+
+// function ProfilePage() {
+//   const navigate = useNavigate();
+//   const [currentUser, setCurrentUser] = useState(null);
+//   const [bio, setBio] = useState('');
+//   const [image, setImage] = useState(null);
+//   const [url, setUrl] = useState('');
+//   const [uploading, setUploading] = useState(false);
+
+//   useEffect(() => {
+//     const unsubscribe = auth.onAuthStateChanged((user) => {
+//       if (user) {
+//         setCurrentUser(user);
+//         if (user.photoURL) {
+//           setUrl(user.photoURL);
+//         }
+//       } else {
+//         navigate('/');
+//       }
+//     });
+
+//     return unsubscribe;
+//   }, [navigate]);
+
+//   const handleChange = (e) => {
+//     if (e.target.files[0]) {
+//       setImage(e.target.files[0]);
+//     }
+//   };
+
+//   const handleUpload = async () => {
+//     if (!image) {
+//       return;
+//     }
+//     setUploading(true);
+//     const storageRef = ref(storage, `images/${image.name}`);
+//     const uploadTask = uploadBytesResumable(storageRef, image);
+
+//     uploadTask.on(
+//       'state_changed',
+//       null,
+//       (error) => {
+//         console.log(error);
+//         setUploading(false);
+//       },
+//       async () => {
+//         const downloadURL = await getDownloadURL(storageRef);
+//         setUrl(downloadURL);
+//         await updateProfile(currentUser, {
+//           photoURL: downloadURL,
+//         });
+//         setUploading(false);
+//       }
+//     );
+//   };
+
+//   const updateBio = async () => {
+//     const userDocRef = doc(db, 'users', currentUser.uid);
+//     await updateDoc(userDocRef, { bio });
+//   };
+
+//   if (!currentUser) {
+//     return null;
+//   }
+
+//   return (
+//     <div className="profile-page">
+//       <h1>Welcome, {currentUser.displayName}</h1>
+//       <EditDisplayName user={currentUser} />
+//       <div className="profile-info">
+//         <img src={url} alt="profile" className="profile-picture" />
+//         <input type="file" onChange={handleChange} />
+//         <button onClick={handleUpload} disabled={uploading}>
+//           {uploading ? 'Uploading...' : 'Upload Profile Picture'}
+//         </button>
+//       </div>
+//       <div className="bio-section">
+//         <h3>Bio</h3>
+//         <textarea
+//           className="bio-input"
+//           value={bio}
+//           onChange={(e) => setBio(e.target.value)}
+//           rows="5"
+//           cols="30"
+//         ></textarea>
+//         <button onClick={updateBio}>Update Bio</button>
+//       </div>
+//     </div>
+//   );
+// }
+
+// export default ProfilePage;
