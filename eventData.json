@@ -67,7 +67,7 @@
 {
     "id": 3,
     "user": "montanajanel",
-    "artform" : ["Singer", "Songwriter"],
+    "artform" : "Singer",
     "thumbnail": "https://imgur.com/DKVB3gv.jpg",
     "title": "Lucky Cat Record Club 1yr Anniversary Party",
     "artist": "Montana Janel",
@@ -134,7 +134,7 @@
 {
     "id": 5,
     "user": "jonryanisdead",
-    "artform" : ["Director", "Writer"],
+    "artform" : "Director",
     "thumbnail": "https://imgur.com/Xp1H6vc.jpg",
     "title": "Full Time, Pre-Film Fest Screening",
     "artist": "Jon Ryan Sugimoto",
@@ -189,7 +189,7 @@
     "tickets": "ticket-link.com",
     "share": "share-link.com",
     "images": ["https://imgur.com/pUeOGIA.jpg", "https://imgur.com/IeqQT4v.jpg", "https://imgur.com/gRVPOXc.jpg"],
-    "description": "PULL UP on me and this ~talented~ troupe of dumbass comedians. We'll take the stage and whip up a series of unscripted scenes and characters based solely on audience suggestions. You never know what kind of wacky situations we'll come up with, we sure don't, but we guarantee it will be side-splittingly funny. Our performances are fast-paced, interactive, and always unpredictable. Find yourself swept up in a musical number, caught in the middle of a bizarre love triangle, or watching a group of superheroes saving the world in the most ridiculous way possible. Grab your friends, grab your mom, your cat, bring a g-ddamn sense of humor, and get ready for a night you won't forget.",
+    "description": "PULL UP on me and this ~talented~ troupe of dumbass comedians. We'll take the stage and whip up a series of unscripted scenes and characters based solely on audience suggestions. You never know what kind of wacky situations we'll come up with, we sure don't, but we guarantee it will be side-splittingly funny. Find yourself swept up in a musical number or caught in the middle of a bizarre love triangle. Grab your friends, grab your mom, your cat, bring a g-ddamn sense of humor, and get ready for a night you won't forget.",
     "age": "18+",
     "category": "Comedy",
     "subcategory": "shows",
@@ -200,7 +200,7 @@
 {
     "id": 7,
     "user": "natashanirvana",
-    "artform" : ["Painter", "Visual Artist", "Digital Artist"],
+    "artform" : "Painter",
     "thumbnail": "https://imgur.com/fFFS1d8.jpg",
     "title": "Catch me at Artists and Fleas!",
     "artist": "Natasha Bartley",
@@ -300,7 +300,7 @@
 {
     "id": 10,
     "user": "thezummymohammed",
-    "artform" : ["Dancer", "Singer", "Actor"],
+    "artform" : "Dancer",
     "thumbnail": "https://imgur.com/i59ejqT.jpg",
     "title": "Cinderella: The Musical",
     "artist": "Zummy Mohammed",
