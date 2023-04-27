@@ -65,18 +65,15 @@ function App() {
         <Route path="/GigsPage" element={<GigsPage />} />
         <Route path="/About" element={<About />} />
         <Route path="/Create" element={<Create />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
+        <Route path="/PhotoGallery" element={<PhotoGallery />} />
+        <Route path="/VideoUploadForm" element={<VideoUploadForm />} />
+        <Route path="/PersonalPhotos" element={user ? <PersonalPhotos user={user} /> : <FirebaseAuth />} />
+        <Route path="/UploadPhotoForm" element={<UploadPhotoForm />} />
+        <Route path="/EventsMap" element={<EventsMap />} />
       </Routes>
-      <UploadPhotoForm />
-      {/* <Dialogflow /> */}
-      <EventsMap />
-      <VideoUploadForm />
-      {/* <ChatGPT /> */}
-      <ProfilePage />      
-      <PhotoGallery />
-    
-      {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
-      {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
+      
     </div>
   );
 }
