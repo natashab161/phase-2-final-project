@@ -1,11 +1,18 @@
-.eventForm {
-    background-color: #5b0745a9;
-    border-radius: 2.5vw;
+.eventFormContainer {
+    margin-top: 5rem;
+    border: 1px solid #ffffff22;
+    background-color: #282c34;
+    background: linear-gradient(0deg, #e25a00aa 10%, #af3204c0 45%, #6a0039ab 100%);
+    box-shadow: 0 7px 20px 5px #07653c89;
     box-sizing: border-box;
-    height: 50vh;
-    padding: 2.5vw;
+    border-radius: .7rem;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    overflow: hidden;
+    transition: .5s all;
+    height: 100%;
     width: 80vw;
-    align-items: center;
+    padding: 2.5vw;
 }
     
 .eventForm h1 {
@@ -24,65 +31,58 @@
     margin-top: 1.04vh;
 }
 
-.input-container {
+.eventForm input,
+.eventSubmitButton {
+    background-color: #e1e1e1b0;
+    padding: 1%;
     height: 5vh;
     position: relative;
-    width: 100%;
+    width: 45%;
+    margin-top: 2%;
+    border: none;
+    border-radius: 5px;
 }
 
-.ic1 {
-    margin-top: 3.33vh;
-}
-
-.ic2 {
-    margin-top: 2.5vh;
-}
-
-.input {
-    background-color: #51915a;
-    border-radius: 1.2vw;
-    border: 0;
-    box-sizing: border-box;
+.eventSubmitButton {
+    background-color: #007d0d;
+    border-radius: 5px;
     color: #eee;
-    font-size: 1.8vw;
-    height: 100%;
+    cursor: pointer;
     outline: 0;
-    padding: 0.4vh 2vw 0;
-    width: 100%;
+    align-items: center;
+    text-align: center;
+    transition: background-color 200ms;
 }
 
-.cut {
-    background-color: #15172b;
-    border-radius: 1vw;
-    height: 2vw;
-    left: 2vw;
-    position: absolute;
-    top: -2vw;
-    transform: translateY(0);
-    transition: transform 200ms;
-    width: 7.6vw;
-}
-
-.cut-short {
-    width: 5vw;
-}
-
-.input:focus ~ .cut,
-.input:not(:placeholder-shown) ~ .cut {
-    transform: translateY(0.8vh);
-}
-
-.placeholder {
-    color: #5b0745a9;
+.eventForm input::placeholder {
+    color: #450025;
     font-family: sans-serif;
-    left: 2vw;
-    line-height: 1.4vw;
-    pointer-events: none;
-    position: absolute;
-    transform-origin: 0 50%;
-    transition: transform 200ms, color 200ms;
-    top: 2vw;
+    line-height: 1.4rem;
 }
+
+@media (min-width: 480px) {
+    .eventForm input::placeholder {
+        left: 2vw;
+        position: absolute;
+        top: 2vw;
+        pointer-events: none;
+        transform-origin: 0 50%;
+        transition: transform 200ms, color 200ms;
+    }
+}
+ 
+
+
+.eventSubmitButton:hover {
+    background-color: #00b68f ;
+}
+
+.eventSubmitButton:active {
+    background-color: #00b68f;
+}
+
+/*
+this codeis for mild, unnessicary animation 
 
 .input:focus ~ .placeholder,
 .input:not(:placeholder-shown) ~ .placeholder {
@@ -97,21 +97,4 @@
     color: #dc2f55;
 }
 
-.submit {
-    background-color: #08d;
-    border-radius: 1.2vw;
-    border: 0;
-    box-sizing: border-box;
-    color: #eee;
-    cursor: pointer;
-    font-size: 1.8vw;
-    height: 5vh;
-    margin-top: 3.8vh;
-    outline: 0;
-    text-align: center;
-    width: 100%;
-}
-
-.submit:active {
-    background-color: #06b;
-}
+*/
