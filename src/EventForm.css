@@ -1,10 +1,11 @@
 .eventForm {
-    background-color: #15172b;
+    background-color: #5b0745a9;
     border-radius: 20px;
     box-sizing: border-box;
     height: 500px;
     padding: 20px;
     width: 320px;
+    align-items: center;
   }
   
   .eventForm h1 {
@@ -31,7 +32,7 @@
   }
   
   .input {
-    background-color: #303245;
+    background-color: #51915a;
     border-radius: 12px;
     border: 0;
     box-sizing: border-box;
