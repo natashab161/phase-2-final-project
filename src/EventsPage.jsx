@@ -1,45 +1,37 @@
-import React, {  useState, useEffect  } from "react";
-import EventCard from "./EventCard";
+import React, { useState, useEffect } from "react";
+import SearchEvents from "./SearchEvents";
+import EventsContainer from "./EventsContainer";
 import "./eventCard.css";
 
 function EventsPage() {
   const [events, setEvents] = useState([]);
-  const [visibleEvents, setVisibleEvents] = useState([]);
-  const [startIndex, setStartIndex] = useState(0);
+  const [searchInput, setSearchInput] = useState("");
+  const [filteredEvents, setFilteredEvents] = useState([]);
 
   useEffect(() => {
     fetch("https://pullupnyc-default-rtdb.firebaseio.com/events.json")
       .then((response) => response.json())
       .then((data) => {
         setEvents(data);
-        setVisibleEvents(data.slice(0, 6)); 
       });
   }, []);
 
-  const handlePrevClick = () => {
-    setStartIndex(Math.max(0, startIndex - 6)); 
-    setVisibleEvents(events.slice(startIndex - 6, startIndex)); 
-  };
+  useEffect(() => {
+    const newFilteredEvents = events.filter((event) => {
+      return event.category && event.category.toLowerCase().includes(searchInput.toLowerCase());
+    });
+    setFilteredEvents(newFilteredEvents);
+  }, [events, searchInput]);
 
-  const handleNextClick = () => {
-    setStartIndex(startIndex + 6); 
-    setVisibleEvents(events.slice(startIndex + 6, startIndex + 12)); 
-  };
-
-  const renderEventCards = visibleEvents.map((event) => {
-    return <EventCard key={event.id} event={event}></EventCard>;
-  });
+  function onSearch(input) {
+    setSearchInput(input);
+  }
 
   return (
     <div>
-      <div className="eventsContainer">
-      {renderEventCards}
-      </div>
-    <div class="button-container">
-    {startIndex > 0 && <button class="pageButton"onClick={handlePrevClick}>Prev</button>}
-    {startIndex + 6 < events.length && (
-      <button class="pageButton" onClick={handleNextClick}>Next</button>)}</div>
-      </div>
+      <SearchEvents searchInput={searchInput} onSearch={onSearch} />
+      <EventsContainer events={filteredEvents} />
+    </div>
   );
 }
 

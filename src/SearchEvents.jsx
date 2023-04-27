@@ -4,7 +4,7 @@ import EventCard from "./EventCard";
 function SearchEvents({ searchInput, onSearch }) {
   return (
     <div className="searchbar">
-      <label htmlFor="search">Find an event near you</label>
+      <label htmlFor="search">Browse events near you </label>
       <input
         value={searchInput}
         type="text"
