@@ -1,3 +1,58 @@
+// import React from 'react';
+// import {
+//   getFirestore,
+//   collection,
+//   where,
+//   query,
+//   orderBy,
+//   limit,
+//   onSnapshot,
+// } from 'firebase/firestore';
+// import { app } from './Firebase';
+// import './PersonalPhotos.css';
+
+// const db = getFirestore(app);
+
+// function PersonalPhotos({ user }) {
+//   const [photos, setPhotos] = React.useState([]);
+
+//   React.useEffect(() => {
+//     const photosRef = collection(db, 'photos');
+//     const userPhotosQuery = query(
+//       photosRef,
+//       where('userId', '==', user.uid),
+//       orderBy('createdAt', 'desc'),
+//       limit(10)
+//     );
+
+//     const unsubscribe = onSnapshot(userPhotosQuery, (querySnapshot) => {
+//       const userPhotos = querySnapshot.docs.map((doc) => ({
+//         id: doc.id,
+//         ...doc.data(),
+//       }));
+//       setPhotos(userPhotos);
+//     });
+
+//     return () => {
+//       unsubscribe();
+//     };
+//   }, [db, user.uid]);
+
+//   return (
+//     <div className="personal-photos">
+//       <h2>Your Photos</h2>
+//       {photos.map((photo) => (
+//         <div key={photo.id} className="personal-photo">
+//           <img src={photo.url} alt={photo.caption} />
+//           <p>{photo.caption}</p>
+//         </div>
+//       ))}
+//     </div>
+//   );
+// }
+
+// export default PersonalPhotos;
+
 import React, { useState, useEffect } from 'react';
 import {
   getStorage,
