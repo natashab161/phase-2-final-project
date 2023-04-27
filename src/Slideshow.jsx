@@ -1,10 +1,12 @@
 import React, { useState,useEffect, useRef } from "react";
 
 const imageSlides = 
-    ["https://i.imgur.com/D72dbT3.jpg", //pullup
+    [
+     "https://i.imgur.com/D72dbT3.jpg", //pullup
      "https://i.imgur.com/v8rMkLE.jpg", //arts grow
-     "https://i.imgur.com/al3dz3f.jpg"]; //event planners
-     
+     "https://i.imgur.com/al3dz3f.jpg", //event planners
+    ]; 
+
 
     const delay  = 5000;
 
