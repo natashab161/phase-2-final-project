@@ -37,6 +37,79 @@ body {
     flex-direction: row;
     align-items: flex-start;
   }
+}
 
+/* Slideshow */
+
+.slideshow {
+  margin: 0 auto;
+  overflow: hidden;
+  max-width: 500px;
+}
+
+.slideshowSlider {
+  white-space: nowrap;
+  transition: ease 1000ms;
+}
+
+.slide {
+  display: inline-block;
+
+  height: 400px;
+  width: 100%;
+  border-radius: 40px;
+}
+
+/* Buttons */
+
+.slideshowDots {
+  text-align: center;
+}
+
+.slideshowDot {
+  display: inline-block;
+  height: 20px;
+  width: 20px;
+  border-radius: 50%;
+
+  cursor: pointer;
+  margin: 15px 7px 0px;
+
+  background-color: #c4c4c4;
+}
+
+.slideshowDot.active {
+  background-color: #277aa3;
+}
+
+event-container{
+  display: flex;
+}
+.eventCard {
+  margin: 2%;
+	box-shadow: 0 4px 8px 0 rgba(71, 71, 71, 0.2);
+  transition: 0.3s;
+  margin: 3%;
+  border: none;
+  /* there is something blocking border-radius from rounding all 4 boarders */
+  border-radius: 25px;
+  width: 25%;
+  backdrop-filter: blur; 
+  
+}
+
+.eventCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2); 
+}
+
+.eventThumbnail {
+  width: 100%;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
+}
+
+.eventTextContainter {
+  box-shadow: 2px  16px;
+  padding: 1%
 }
 
