@@ -21,6 +21,8 @@ import Create from "./Create";
 import EventMap from "./EventMap";
 import GoogleAnalytics from './GoogleAnalytics';
 // import PhotoMetadataVisualization from "./PhotoMetadataVisualization";
+import { Profiler } from 'react';
+
 
 // import Dialogflow from "./DialogFlow";
 
@@ -71,7 +73,7 @@ function App() {
       <EventMap />
       <VideoUploadForm />
       <ChatGPT />
-      <ProfilePage />
+      {/* <ProfilePage /> */}
       <PhotoGallery />
       {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
