@@ -56,6 +56,7 @@ function EventForm({ eventSubmit }){
 
     return(
         <div className="eventForm">
+            <h1>Create your event</h1>
            <form onSubmit={handleEventSubmit}>
             <input
                 onChange={(e) => setTitle(e.target.value)}
