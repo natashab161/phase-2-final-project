@@ -1,10 +1,12 @@
 // src/firebase.js
 import { initializeApp, getApps, getApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import firebase from "firebase/app";
+import firebase from "firebase/compat/app";
 import "firebase/auth";
 import * as firebaseui from "firebaseui";
 import { getFunctions } from 'firebase/functions'
+import 'firebase/compat/database';
+
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -14,6 +16,8 @@ const firebaseConfig = {
   messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
+  databaseURL: "https://pullupnyc-default-rtdb.firebaseio.com/",
+
 };
 
 const app = initializeApp(firebaseConfig);
