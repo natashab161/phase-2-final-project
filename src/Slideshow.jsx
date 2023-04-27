@@ -1,20 +1,27 @@
-import React, { useState,useEffect} from "react";
+import React, { useState,useEffect, useRef } from "react";
 
-const imageSlides = ["#0088FE", "#00C49F", "#FFBB28"];
-const delay  = 5000;
+const imageSlides = 
+    ["https://i.imgur.com/D72dbT3.jpg", //pullup
+     "https://i.imgur.com/v8rMkLE.jpg", //arts grow
+     "https://i.imgur.com/al3dz3f.jpg"]; //event planners
+
+    const delay  = 5000;
 
 function Slideshow() {
-    const [index, setIndext] = useState(0);
+    const [index, setIndex] = useState(0);
+    const timeoutRef = useRef(null);
 
-    useEffect(() =>{
-        setTimeout(
+    useEffect(() => {
+        timeoutRef.current = setTimeout(
             () =>
-                setIndext((prevIndex) =>
+                setIndex((prevIndex) =>
                     prevIndex === imageSlides.length - 1 ? 0 : prevIndex +  1 
                 ),
              delay
          );
-    })
+        
+         return () => {};
+    }, [index]);
 
     return (
         <div className="slideshow">
@@ -29,12 +36,18 @@ function Slideshow() {
                 </div>
                 <div className="slideshowDots">
                     {imageSlides.map((_, idx) => (
-                        <div key={idx} className="slideshowDot"></div>
+                        <div 
+                            key={idx} 
+                            className={`slideshowDot${index === idx ? "active" : ""}`}
+                            onClick={() => {
+                                setIndex(idx);
+                            }}
+                        ></div>
                     ))}
                 </div>
             </div>
         </div>
-    )
+    );
 }
 
 export default Slideshow;

@@ -1,4 +1,5 @@
 import React from "react";
+import Slideshow from "./Slideshow";
 import EventsPage from "./EventsPage";
 import SearchEvents from "./SearchEvents";
 import FeaturedEvents from "./FeaturedEvents";
@@ -6,6 +7,7 @@ import FeaturedEvents from "./FeaturedEvents";
 function Home(){
     return(
         <div>
+            <Slideshow />
             <FeaturedEvents />
             <SearchEvents />
             <EventsPage />
