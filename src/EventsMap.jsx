@@ -1,5 +1,83 @@
+// import React, { useEffect, useState, useMemo } from 'react';
+// import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+
+// const containerStyle = {
+//   width: '100%',
+//   height: '400px',
+// };
+
+// const center = {
+//   lat: 40.7128,
+//   lng: -74.0060,
+// };
+
+// function EventMap({ events, filteredEvents }) {
+//   const [markers, setMarkers] = useState([]);
+
+//   const eventsToMap = useMemo(() => {
+//     return filteredEvents.length > 0 ? filteredEvents : events;
+//   }, [events, filteredEvents]);
+
+//   useEffect(() => {
+//     const abortController = new AbortController();
+//     const signal = abortController.signal;
+
+//     const fetchLocations = async () => {
+//       const geocoder = new window.google.maps.Geocoder();
+
+//       const locations = await Promise.all(
+//         eventsToMap.map(async (event) => {
+//           if (signal.aborted) return;
+
+//           const { street, city, state, zip } = event.location;
+//           const address = `${street}, ${city}, ${state} ${zip}`;
+
+//           return new Promise((resolve, reject) => {
+//             geocoder.geocode({ address }, (results, status) => {
+//               if (signal.aborted) return;
+//               if (status === 'OK') {
+//                 const position = {
+//                   lat: results[0].geometry.location.lat(),
+//                   lng: results[0].geometry.location.lng(),
+//                 };
+//                 resolve({ id: event.id, position });
+//               } else {
+//                 console.error(`Geocode was not successful for the following reason: ${status}`);
+//                 reject();
+//               }
+//             });
+//           });
+//         })
+//       );
+
+//       if (!signal.aborted) {
+//         setMarkers(locations);
+//       }
+//     };
+
+//     fetchLocations();
+
+//     return () => {
+//       abortController.abort();
+//     };
+//   }, [eventsToMap]);
+
+//   return (
+//     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
+//       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10}>
+//         {markers.map((marker) => (
+//           <Marker key={marker.id} position={marker.position} />
+//         ))}
+//       </GoogleMap>
+//     </LoadScript>
+//   );
+// }
+
+// export default EventMap;
+
 import React, { useEffect, useState } from 'react';
 import { GoogleMap, LoadScript, Marker } from '@react-google-maps/api';
+
 
 const json = {
     
@@ -400,71 +478,4 @@ const json = {
     }
     
     export default EventMap;
-    
-    // const containerStyle = {
-    //   width: '100%',
-    //   height: '400px',
-    // };
-    
-    // const center = {
-    //   lat: 40.7128,
-    //   lng: -74.0060,
-    // };
-    
-    // function EventMap() {
-    //   const [markers, setMarkers] = useState([]);
-    //   const [map, setMap] = useState(null);
-    
-    //   useEffect(() => {
-    //     const fetchLocations = async () => {
-    //       if (!map) return;
-    //       const geocoder = new window.google.maps.Geocoder();
-    
-    //       const locations = await Promise.all(
-    //         json.events.map(async event => {
-    //           const { street, city, state, zip } = event.location;
-    //           const address = `${street}, ${city}, ${state} ${zip}`;
-    
-    //           return new Promise((resolve, reject) => {
-    //             geocoder.geocode({ address }, (results, status) => {
-    //               if (status === 'OK') {
-    //                 const position = {
-    //                   lat: results[0].geometry.location.lat(),
-    //                   lng: results[0].geometry.location.lng(),
-    //                 };
-    //                 resolve({ id: event.id, position });
-    //               } else {
-    //                 console.error(`Geocode was not successful for the following reason: ${status}`);
-    //                 reject();
-    //               }
-    //             });
-    //           });
-    //         })
-    //       );
-    
-    //       setMarkers(locations);
-    //       console.log("Fetched locations:", locations);
-    //     };
-    
-    //     if (map) {
-    //       fetchLocations();
-    //     }
-    //   }, [map]);
-    
-    //   const onMapLoad = (mapInstance) => {
-    //     setMap(mapInstance);
-    //   };
-    
-    //   return (
-    //     <LoadScript googleMapsApiKey={process.env.REACT_APP_GOOGLE_MAPS_API_KEY}>
-    //       <GoogleMap mapContainerStyle={containerStyle} center={center} zoom={10} onLoad={onMapLoad}>
-    //         {markers.map(marker => (
-    //           <Marker key={marker.id} position={marker.position} />
-    //         ))}
-    //       </GoogleMap>
-    //     </LoadScript>
-    //   );
-    // }
-    
-    // export default EventMap;
     

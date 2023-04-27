@@ -1,12 +1,8 @@
-// src/firebase.js
-import { initializeApp, getApps, getApp } from "firebase/app";
-import { getAuth, GoogleAuthProvider } from "firebase/auth";
-import firebase from "firebase/compat/app";
-import "firebase/auth";
-import * as firebaseui from "firebaseui";
-import { getFunctions } from 'firebase/functions'
-import 'firebase/compat/database';
-
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth";
+import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
+import { getFunctions } from 'firebase/functions';
 
 const firebaseConfig = {
   apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
@@ -17,11 +13,12 @@ const firebaseConfig = {
   appId: process.env.REACT_APP_FIREBASE_APP_ID,
   measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
   databaseURL: "https://pullupnyc-default-rtdb.firebaseio.com/",
-
 };
 
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
+const storage = getStorage(app);
+const db = getFirestore(app);
 const functions = getFunctions(app);
 
-export { app, auth, functions };
+export { app, auth, storage, db, functions };

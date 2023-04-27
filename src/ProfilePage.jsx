@@ -26,6 +26,7 @@ function ProfilePage() {
   const [bio, setBio] = useState('');
   const [image, setImage] = useState(null);
   const [url, setUrl] = useState('');
+  const [uploading, setUploading] = useState(false);
 
   useEffect(() => {
     if (currentUser && currentUser.photoURL) {
@@ -40,6 +41,10 @@ function ProfilePage() {
   };
 
   const handleUpload = async () => {
+    if (!image) {
+      return;
+    }
+    setUploading(true);
     const storageRef = ref(storage, `images/${image.name}`);
     const uploadTask = uploadBytesResumable(storageRef, image);
 
@@ -51,6 +56,7 @@ function ProfilePage() {
       (error) => {
         // error function ...
         console.log(error);
+        setUploading(false);
       },
       async () => {
         // complete function ...
@@ -59,6 +65,7 @@ function ProfilePage() {
         await updateProfile(currentUser, {
           photoURL: downloadURL,
         });
+        setUploading(false);
       }
     );
   };
@@ -84,7 +91,9 @@ function ProfilePage() {
       <div className="profile-info">
         <img src={url} alt="profile" className="profile-picture" />
         <input type="file" onChange={handleChange} />
-        <button onClick={handleUpload}>Upload Profile Picture</button>
+        <button onClick={handleUpload} disabled={uploading}>
+          {uploading ? 'Uploading...' : 'Upload Profile Picture'}
+        </button>
       </div>
       <div className="bio-section">
         <h3>Bio</h3>
