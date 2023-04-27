@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 
-  /* look into how to make certain forms required */
     /* and code for drop downs */
 
 function EventForm({ eventSubmit }){
@@ -68,8 +67,6 @@ function EventForm({ eventSubmit }){
       .catch((error)  =>  {
         console.error('Error:', error);
       })
-
-  
     }
 
     return(
@@ -141,7 +138,7 @@ function EventForm({ eventSubmit }){
                 onChange={(e) => setTime(e.target.value)}
                 type="number"
                 placeholder="Time" /*this should probably be drop down to avoid user errors */
-                value="time"
+                value={time}
                 required
             ></input>
                <input
@@ -196,6 +193,12 @@ function EventForm({ eventSubmit }){
                 value={description}
             ></input>
             <input
+                onChange={(e) => setImages(e.target.value)}
+                type="text"
+                placeholder="Additional Images"
+                value={images}
+            ></input>
+            <input
                 onChange={(e) => setCollaborators(e.target.value)}
                 type="text"
                 placeholder="Collaborating? Real homies give credit where credit is due"
@@ -208,7 +211,7 @@ function EventForm({ eventSubmit }){
                 value={tags}
             ></input>
             <br />
-            <button type="submit">Create Event</button>
+            <button type="submit" className="eventSubmitButton">Create Event</button>
             
 
            </form>
