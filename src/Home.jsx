@@ -1,4 +1,5 @@
 import React from "react";
+import Slideshow from "./Slideshow.jsx"
 import EventsPage from "./EventsPage";
 import SearchEvents from "./SearchEvents";
 import FeaturedEvents from "./FeaturedEvents";
@@ -6,8 +7,7 @@ import FeaturedEvents from "./FeaturedEvents";
 function Home(){
     return(
         <div>
-            <h1>the place to be for local artists and art-lovers to connect and grow</h1>
-            {/* <FeaturedEvents /> */}
+            <Slideshow />
             <FeaturedEvents />
             <SearchEvents />
             <EventsPage />
