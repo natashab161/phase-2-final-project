@@ -8,10 +8,27 @@ function EventsPage() {
   const [startIndex, setStartIndex] = useState(0);
 
   useEffect(() => {
-  fetch("http://localhost:3000/events")
-  .then(response => response.json())
-  .then(data => {setEvents(data)})
-  }, [])
+    fetch("https://pullupnyc-default-rtdb.firebaseio.com/events.json")
+      .then((response) => response.json())
+      .then((data) => {
+        setEvents(data);
+        setVisibleEvents(data.slice(0, 6)); 
+      });
+  }, []);
+
+  const handlePrevClick = () => {
+    setStartIndex(Math.max(0, startIndex - 6)); 
+    setVisibleEvents(events.slice(startIndex - 6, startIndex)); 
+  };
+
+  const handleNextClick = () => {
+    setStartIndex(startIndex + 6); 
+    setVisibleEvents(events.slice(startIndex + 6, startIndex + 12)); 
+  };
+
+  const renderEventCards = visibleEvents.map((event) => {
+    return <EventCard key={event.id} event={event}></EventCard>;
+  });
 
   return (
     <div>
