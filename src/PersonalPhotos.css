@@ -1,0 +1,92 @@
+.personal-photos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+      
+  }
+  
+  .photo-container {
+    position: relative;
+  }
+  
+  .photo {
+    display: block;
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    cursor: pointer;
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  .photo:hover {
+    transform: scale(1.05);
+  }
+  
+  .delete-button {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    padding: 5px;
+    background-color: rgba(0, 0, 0, 0.5);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .delete-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+  }
+  
+  .upload-form {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .upload-form input[type="file"] {
+    display: none;
+  }
+  
+  .upload-form label {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0066CC;
+    color: white;
+    cursor: pointer;
+    border-radius: 10px;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .upload-form label:hover {
+    background-color: #0052A3;
+  }
+  
+  .upload-form button[type="submit"] {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FF3333;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: background-color 0.2s ease-in-out;
+  }
+  
+  .upload-form button[type="submit"]:hover {
+    background-color: #CC0000;
+  }
+  
