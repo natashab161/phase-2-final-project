@@ -1,0 +1,35 @@
+{
+  "functions": [
+    {
+      "source": "functions",
+      "codebase": "default"
+    }
+  ],
+  "uploadImageMetadata": [
+    {
+      "source": "uploadImageMetadata",
+      "codebase": "default"
+    }
+  ],
+  "database": {
+    "rules": "database.rules.json"
+  },
+  "hosting": {
+    "public": "build",
+    "ignore": [
+      "firebase.json",
+      "**/.*",
+      "**/node_modules/**"
+    ],
+    "rewrites": [
+      {
+        "source": "**",
+        "destination": "/index.html"
+      }
+    ]
+  },
+  "storage": {
+    "rules": "storage.rules"
+  },
+  "extensions": {}
+}
