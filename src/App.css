@@ -42,9 +42,9 @@ body {
 /* Slideshow */
 
 .slideshow {
-  margin: 0 auto;
+  margin: 5px ;
   overflow: hidden;
-  max-width: 500px;
+  max-width: 35%px;
 }
 
 .slideshowSlider {
