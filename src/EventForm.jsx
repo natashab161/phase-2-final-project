@@ -1,6 +1,6 @@
 import React, { useState } from "react";
+import './EventForm.css';
 
-  /* look into how to make certain forms required */
     /* and code for drop downs */
 
 function EventForm({ eventSubmit }){
@@ -51,138 +51,219 @@ function EventForm({ eventSubmit }){
             description: description,
             collaborators:collaborators,
             tags: tags,  
-        }
+        };
+
+      fetch('/eventsdata.json', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newEvent),
+      })
+
+      .then(response => response.json())
+      .then(data => {
+        eventSubmit(data);
+      })
+      .catch((error)  =>  {
+        console.error('Error:', error);
+      })
     }
 
     return(
-        <div className="eventForm">
-           <form onSubmit={handleEventSubmit}>
-            <input
-                onChange={(e) => setTitle(e.target.value)}
-                type="text"
-                placeholder="Title your event"
-                value={title}
-            ></input>
-             <input
-                onChange={(e) => setStreet1(e.target.value)}
-                type="text"
-                placeholder="Street address"
-                value={street1}
-            ></input>
-            <input
-                onChange={(e) => setStreet2(e.target.value)}
-                type="text"
-                placeholder="Street address"
-                value={street2}
-            ></input>
-            <input
-                onChange={(e) => setCity(e.target.value)}
-                type="text"
-                placeholder="City"
-                value={city}
-            ></input>
-            <input
-                onChange={(e) => setState(e.target.value)}
-                type="text"
-                placeholder="State" /* should state be a  drop down? */
-                value={state}
-            ></input>
-            <input
-                onChange={(e) => setZipCode(e.target.value)}
-                type="number"
-                placeholder="Zip code"
-                value={zipCode}
-            ></input>
-             <input
-                onChange={(e) => setNeightborhood(e.target.value)}
-                type="text"
-                placeholder="Neighborhood"
-                value={neighborhood}
-            ></input>
-             <input
-                onChange={(e) => setVenue(e.target.value)}
-                type="text"
-                placeholder="Wya? Add the venue name here"
-                value={venue}
-            ></input>
-            {/* this one might need to be altered based on the built in calander feature */}
-             <input
-                onChange={(e) => setDate(e.target.value)}
-                type="number"
-                placeholder="Calander date"
-                value={date}
-            ></input>
-            <input
-                onChange={(e) => setTime(e.target.value)}
-                type="number"
-                placeholder="Time" /*this should probably be drop down to avoid user errors */
-                value="time"
-            ></input>
-               <input
-                onChange={(e) => setTickets(e.target.value)}
-                type="string"
-                placeholder="Link to get tickets"
-                value={tickets}
-            ></input>
-              <input
-                onChange={(e) => setAge(e.target.value)}
-                type="number"
-                placeholder="Is your  event 18+, 21+ or all ages?" /* this should be a drop down, again to prevent user errors */
-                value={age}
-            ></input>
-               <input
-                onChange={(e) => setPrice(e.target.value)}
-                type="number"
-                placeholder="$$$"
-                value={price}
-            ></input>
-               <input
-                onChange={(e) => setThumbnail(e.target.value)}
-                type=""
-                placeholder="Insert image here"
-                value={thumbnail}
-            ></input>
-            <input
-                onChange={(e) => setArtForm(e.target.value)}
-                type="texr"
-                placeholder="ArtForm" /* would this also be a drop down since we will only have so many  artForm categories,  also will artforms  be different than "category" */
-                value={artFrom}
-            ></input>
-            <input
-                onChange={(e) => setCategory(e.target.value)}
-                type="text"
-                placeholder="Categories"
-                value={category}
-            ></input>
-            <input
-                onChange={(e) => setSubcategory(e.target.value)}
-                type="text"
-                placeholder="Niche down"
-                value={subcategory}
-            ></input>
-              <input
-                onChange={(e) => setDescription(e.target.value)}
-                type="text"
-                placeholder="Got anything else you want people to know? Write it here!" 
-                value={description}
-            ></input>
-            <input
-                onChange={(e) => setCollaborators(e.target.value)}
-                type="text"
-                placeholder="Collaborating? Real homies give credit where credit is due"
-                value={collaborators}
-            ></input>
-              <input
-                onChange={(e) => setTags(e.target.value)}
-                type="string"
-                placeholder="Any other " 
-                value={tags}
-            ></input>
-            
+        <div className="eventFormContainer">
+            <div className="eventForm">
+                <h1>publish your event</h1>
+                    <form onSubmit={handleEventSubmit}>
 
-           </form>
+                        <h2>title your event  *</h2>
+                        <input
+                            onChange={(e) => setTitle(e.target.value)}
+                            type="text"
+                            placeholder="Title your event"
+                            value={title}
+                            required
+                        ></input>
+
+                        <h2>venue name *</h2>
+                        <input
+                            onChange={(e) => setVenue(e.target.value)}
+                            type="text"
+                            placeholder="Wya? Add the venue name here"
+                            value={venue}
+                            required
+                        ></input>
+
+
+
+                        <h2>street name *</h2>
+                        <input
+                            onChange={(e) => setStreet1(e.target.value)}
+                            type="text"
+                            placeholder="Street address"
+                            value={street1}
+                            required
+                        ></input>
+
+                        <h2>street 2</h2>
+                        <input
+                            onChange={(e) => setStreet2(e.target.value)}
+                            type="text"
+                            placeholder="Street address"
+                            value={street2}
+                        ></input>
+
+                        <h2>city *</h2>
+                        <input
+                            onChange={(e) => setCity(e.target.value)}
+                            type="text"
+                            placeholder="City"
+                            value={city}
+                            required
+                        ></input>
+
+                        <h2>state *</h2>
+                        <input
+                            onChange={(e) => setState(e.target.value)}
+                            type="text"
+                            placeholder="State" /* should state be a  drop down? */
+                            value={state}
+                            required
+                        ></input>
+
+                        <h2>zip code *</h2>
+                        <input
+                            onChange={(e) => setZipCode(e.target.value)}
+                            type="number"
+                            placeholder="Zip code"
+                            value={zipCode}
+                            required
+                        ></input>
+
+                        <h2>neighborhood</h2>
+                        <input
+                            onChange={(e) => setNeightborhood(e.target.value)}
+                            type="text"
+                            placeholder="Neighborhood"
+                            value={neighborhood}
+                        ></input>
+                        {/* this one might need to be altered based on the built in calander feature */}
+                        <h2>event date * </h2>
+                        <input
+                            onChange={(e) => setDate(e.target.value)}
+                            type="number"
+                            placeholder="Calander date"
+                            value={date}
+                            required
+                        ></input>
+
+                        <h2>time *</h2>
+                        <input
+                            onChange={(e) => setTime(e.target.value)}
+                            type="number"
+                            placeholder="Time" /*this should probably be drop down to avoid user errors */
+                            value={time}
+                            required
+                        ></input>
+
+                        <h2>link tickets</h2>
+                        <input
+                            onChange={(e) => setTickets(e.target.value)}
+                            type="string"
+                            placeholder="Link to get tickets"
+                            value={tickets}
+                        ></input>
+
+                        <h2>age limit *</h2>
+                        <input
+                            onChange={(e) => setAge(e.target.value)}
+                            type="number"
+                            placeholder="Is your  event 18+, 21+ or all ages?" /* this should be a drop down, again to prevent user errors */
+                            value={age}
+                            required
+                        ></input>
+
+                        <h2>price *</h2>
+                        <input
+                            onChange={(e) => setPrice(e.target.value)}
+                            type="number"
+                            placeholder="$$$"
+                            value={price}
+                            required
+                        ></input>
+
+                        <h2>thumbnail image</h2>
+                        <input
+                            onChange={(e) => setThumbnail(e.target.value)}
+                            type=""
+                            placeholder="Insert image here"
+                            value={thumbnail}
+                        ></input>
+
+                        <h2>art form</h2>
+                        <input
+                            onChange={(e) => setArtForm(e.target.value)}
+                            type="texr"
+                            placeholder="ArtForm" /* would this also be a drop down since we will only have so many  artForm categories,  also will artforms  be different than "category" */
+                            value={artFrom}
+                        ></input>
+
+                        <h2>category *</h2>
+                        <input
+                            onChange={(e) => setCategory(e.target.value)}
+                            type="text"
+                            placeholder="Categories"
+                            value={category}
+                            required
+                        ></input>
+
+                        <h2>subcategory</h2>
+                        <input
+                            onChange={(e) => setSubcategory(e.target.value)}
+                            type="text"
+                            placeholder="Niche down"
+                            value={subcategory}
+                        ></input>
+
+                        <h2>event description</h2>
+                        <input
+                            onChange={(e) => setDescription(e.target.value)}
+                            type="text"
+                            placeholder="Got anything else you want people to know? Write it here!" 
+                            value={description}
+                        ></input>
+
+                        <h2>addional images</h2>
+                        <input
+                            onChange={(e) => setImages(e.target.value)}
+                            type="text"
+                            placeholder="Additional Images"
+                            value={images}
+                        ></input>
+
+                        <h2>collaborators</h2>
+                        <input
+                            onChange={(e) => setCollaborators(e.target.value)}
+                            type="text"
+                            placeholder="Collaborating? Real homies give credit where credit is due"
+                            value={collaborators}
+                        ></input>
+
+                        <h2>#tags</h2>
+                        <input
+                            onChange={(e) => setTags(e.target.value)}
+                            type="string"
+                            placeholder="Any other " 
+                            value={tags}
+                        ></input>
+                        <br />
+                        <button type="submit" className="eventSubmitButton">Create Event</button>
+
+                </form>
+           </div>
         </div>
     )
 }
+
 
 export default EventForm;
