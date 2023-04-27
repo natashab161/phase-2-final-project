@@ -20,7 +20,7 @@ import About from "./About";
 import Create from "./Create";
 import EventMap from "./EventMap";
 import GoogleAnalytics from './GoogleAnalytics';
-
+// import PhotoMetadataVisualization from "./PhotoMetadataVisualization";
 
 // import Dialogflow from "./DialogFlow";
 
@@ -73,6 +73,7 @@ function App() {
       <ChatGPT />
       <ProfilePage />
       <PhotoGallery />
+      {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
       {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
     </div>
