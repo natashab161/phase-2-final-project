@@ -73,7 +73,7 @@ function App() {
       <EventMap />
       <VideoUploadForm />
       <ChatGPT />
-      {/* <ProfilePage /> */}
+     { /* {/* <ProfilePage /> */} 
       <PhotoGallery />
       {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
