@@ -18,6 +18,9 @@ import './ProfilePage.css';
 import { app, auth } from './Firebase';
 import UserInfo from './UserInfo';
 import EditDisplayName from './EditDisplayName';
+import PersonalPhotos from './PersonalPhotos';
+import VideoUploadForm from './VideoUploadForm';
+import PhotoGallery from './PhotoGallery';
 
 const storage = getStorage(app);
 const db = getFirestore(app);
@@ -116,6 +119,9 @@ function ProfilePage() {
         ></textarea>
         <button onClick={updateBio}>Update Bio</button>
       </div>
+      <PhotoGallery />
+      <PersonalPhotos />
+      <VideoUploadForm />
     </div>
   );
 }
