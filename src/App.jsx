@@ -20,6 +20,7 @@ import About from "./About";
 import Create from "./Create";
 import EventsMap from "./EventsMap";
 import GoogleAnalytics from './GoogleAnalytics';
+import Login from "./Login";
 // import PhotoMetadataVisualization from "./PhotoMetadataVisualization";
 
 // import Dialogflow from "./DialogFlow";
@@ -59,6 +60,9 @@ function App() {
           <li>
             <Link to="/Login">login</Link>
           </li>
+          <li>
+            <Link to="/ProfilePage">profile</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -76,6 +80,7 @@ function App() {
         <Route path="/Login" element={<FirebaseAuth />} />
       </Routes>
       <GoogleAnalytics />
+      <Login />
 
       <UserStatus />
 
