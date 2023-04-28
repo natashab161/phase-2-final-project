@@ -10,15 +10,18 @@ const FirebaseAuth = () => {
   useEffect(() => {
     if (authContainerRef.current) {
       const uiConfig = {
+        signInFlow: 'popup',
+        signInSuccessUrl: '/', // Add the URL you want to redirect to after successful sign-in
+        tosUrl: '/terms-of-service', // Add the URL of your terms of service page
+      
         signInOptions: [
           EmailAuthProvider.PROVIDER_ID,
           {
             provider: GoogleAuthProvider.PROVIDER_ID,
-            clientId: "737390277278-e65basbmigp2304kvg76e5o4nt1d6mdj.apps.googleusercontent.com"
-          }
-          // Add more providers as needed
+            clientId: "737390277278-e65basbmigp2304kvg76e5o4nt1d6mdj.apps.googleusercontent.com",
+          },
         ],
-        // Other config options...
+      
         callbacks: {
           signInSuccessWithAuthResult: (authResult, redirectUrl) => {
             // Handle sign-in success.
@@ -26,6 +29,7 @@ const FirebaseAuth = () => {
           },
         },
       };
+      
 
       const ui = firebaseui.auth.AuthUI.getInstance() || new firebaseui.auth.AuthUI(auth);
       ui.start(authContainerRef.current, uiConfig);

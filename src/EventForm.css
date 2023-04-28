@@ -95,6 +95,35 @@
 /* .eventForm {
     background-color: #5b0745a9;
     border-radius: 2.5vw;
+    margin-top: 5rem;
+    border: 1px solid #ffffff22;
+    background-color: #282c34;
+    background: linear-gradient(0deg, #e25a00aa 10%, #af3204c0 45%, #6a0039ab 100%);
+    box-shadow: 0 7px 20px 5px #07653c89;
+
+.submit {
+    background-color: #08d;
+    border-radius: 1.2vw;
+    border: 0;
+    box-sizing: border-box;
+    color: #eee;
+    cursor: pointer;
+    font-size: 1.8vw;
+    height: 5vh;
+    margin-top: 3.8vh;
+    outline: 0;
+    text-align: center;
+    width: 100%;
+}
+
+.submit:active {
+    background-color: #06b;
+} */
+
+
+/* .eventForm {
+    background-color: #5b0745a9;
+    border-radius: 2.5vw;
     box-sizing: border-box;
     height: 50vh;
     padding: 2.5vw;
