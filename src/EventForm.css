@@ -1,4 +1,98 @@
-.eventForm {
+.eventFormContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border-radius: .7rem;
+    box-shadow: 0 7px 20px 5px #00000088;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .eventFormContainer:before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    mix-blend-mode: screen;
+  }
+  
+  .eventFormContainer form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .eventFormContainer h2 {
+    color: #eee;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .eventFormContainer label {
+    color: #a89ec9;
+    font-size: 1.2rem;
+    align-self: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  
+  .eventFormContainer input,
+  .eventFormContainer textarea {
+    width: 100%;
+    background-color: rgba(40, 44, 52, 0.8);
+    color: #eee;
+    border: 1px solid #ffffff22;
+    border-radius: .5rem;
+    padding: .5rem;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    transition: box-shadow 0.3s;
+  }
+  
+  .eventFormContainer input:focus,
+  .eventFormContainer textarea:focus {
+    box-shadow: 0 0 10px rgba(169, 169, 169, 0.5);
+    outline: none;
+  }
+  
+  .eventFormContainer textarea {
+    resize: vertical;
+    min-height: 100px;
+  }
+  
+  .eventFormContainer button {
+    padding: .5rem 1rem;
+    border: none;
+    background-color: rgba(169, 169, 169, 0.5);
+    color: #282c34;
+    font-size: 1.2rem;
+    font-weight: 700;
+    border-radius: .5rem;
+    cursor: pointer;
+    transition: background-color 0.3s, box-shadow 0.3s, transform 0.3s;
+  }
+  
+  .eventFormContainer button:hover {
+    background-color: rgba(169, 169, 169, 0.7);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transform: translateY(-2px);
+  }
+  
+  .eventFormContainer button:active {
+    background-color: #EE83E5;
+  }
+  
+/* .eventForm {
     background-color: #5b0745a9;
     border-radius: 2.5vw;
     box-sizing: border-box;
@@ -114,4 +208,4 @@
 
 .submit:active {
     background-color: #06b;
-}
+} */

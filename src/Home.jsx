@@ -3,6 +3,7 @@ import Slideshow from "./Slideshow.jsx"
 import EventsPage from "./EventsPage";
 import SearchEvents from "./SearchEvents";
 import FeaturedEvents from "./FeaturedEvents";
+import EventsMap from "./EventsMap.jsx";
 
 function Home(){
     return(
@@ -11,6 +12,8 @@ function Home(){
             <FeaturedEvents />
             <SearchEvents />
             <EventsPage />
+            <EventsMap />
+            {/* <EventsMap /> */}
             {/* Footer */}
         </div>
     )
