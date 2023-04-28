@@ -63,8 +63,19 @@ import {
   getDownloadURL,
   uploadBytesResumable
 } from 'firebase/storage';
+// import {
+//   getFirestore,
+//   collection,
+//   where,
+//   query,
+//   orderBy,
+//   limit,
+//   onSnapshot,
+// } from 'firebase/firestore';
+
 import { getAuth } from 'firebase/auth';
-import "./PersonalPhotos.css"
+import "./PersonalPhotos.css";
+
 
 const PersonalPhotos = () => {
   const [photos, setPhotos] = useState([]);
