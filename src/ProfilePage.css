@@ -1,5 +1,109 @@
   /* ProfilePage.css */
 
+:root {
+  --primary-color: #000;
+  --secondary-color: #fff;
+  --accent-color: #f1c40f;
+  --transition-duration: 0.3s;
+}
+
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 2rem;
+  background-color: var(--primary-color);
+  color: var(--secondary-color);
+}
+
+.profile-page h1,
+.profile-page h3 {
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 2rem;
+}
+
+.profile-picture {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+  border-radius: 50%;
+  margin-bottom: 1rem;
+  border: 2px solid var(--accent-color);
+  transition: transform var(--transition-duration);
+}
+
+.profile-picture:hover {
+  transform: scale(1.1);
+}
+
+.profile-info input[type="file"] {
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+.bio-section {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.bio-input {
+  width: 100%;
+  margin-bottom: 1rem;
+  resize: vertical;
+  background-color: var(--primary-color);
+  border: 1px solid var(--accent-color);
+  color: var(--secondary-color);
+}
+
+.edit-display-name {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 2rem;
+}
+
+.edit-display-name input[type="text"] {
+  width: 100%;
+  margin-bottom: 1rem;
+  background-color: var(--primary-color);
+  border: 1px solid var(--accent-color);
+  color: var(--secondary-color);
+}
+
+input[type="text"]:focus,
+.bio-input:focus {
+  outline: none;
+  border-color: var(--accent-color);
+}
+
+input[type="submit"],
+input[type="file"] {
+  background-color: var(--accent-color);
+  color: var(--primary-color);
+  cursor: pointer;
+  transition: background-color var(--transition-duration), color var(--transition-duration);
+}
+
+input[type="submit"]:hover,
+input[type="file"]:hover {
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+}
+
+/* ProfilePage.css
+
 .profile-page {
     display: flex;
     flex-direction: column;
@@ -58,4 +162,4 @@
     width: 100%;
     margin-bottom: 1rem;
   }
-  
+   */
