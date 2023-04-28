@@ -20,6 +20,7 @@ import About from "./About";
 import Create from "./Create";
 import EventsMap from "./EventsMap";
 import GoogleAnalytics from './GoogleAnalytics';
+import Login from "./Login";
 // import PhotoMetadataVisualization from "./PhotoMetadataVisualization";
 
 // import Dialogflow from "./DialogFlow";
@@ -56,26 +57,34 @@ function App() {
           <li>
             <Link to="/Create">create</Link>
           </li>
+          <li>
+            <Link to="/Login">login</Link>
+          </li>
+          <li>
+            <Link to="/ProfilePage">profile</Link>
+          </li>
         </ul>
       </nav>
-      <UserStatus />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Community" element={<Community />} />
         <Route path="/GigsPage" element={<GigsPage />} />
         <Route path="/About" element={<About />} />
         <Route path="/Create" element={<Create />} />
+        <Route path="/ProfilePage" element={<ProfilePage />} />
+        <Route path="/PhotoGallery" element={<PhotoGallery />} />
+        <Route path="/VideoUploadForm" element={<VideoUploadForm />} />
+        <Route path="/PersonalPhotos" element={user ? <PersonalPhotos user={user} /> : <FirebaseAuth />} />
+        <Route path="/UploadPhotoForm" element={<UploadPhotoForm />} />
+        <Route path="/EventsMap" element={<EventsMap />} />
+        <Route path="/Login" element={<FirebaseAuth />} />
       </Routes>
-      <UploadPhotoForm />
-      {/* <Dialogflow /> */}
-      <EventsMap />
-      <VideoUploadForm />
-      {/* <ChatGPT /> */}
-      {/* <ProfilePage /> */}
-      <PhotoGallery />
-      {/* <PhotoMetadataVisualization /> */}
       <GoogleAnalytics />
-      {user ? <PersonalPhotos user={user} /> : <FirebaseAuth />}
+      <Login />
+
+      <UserStatus />
+
+      
     </div>
   );
 }
