@@ -10,7 +10,6 @@ function Home(){
         <div>
             {/* <Slideshow /> */}
             {/* <FeaturedEvents /> */}
-            {/* <SearchEvents /> */}
             <EventsPage />
             <EventsMap />
             {/* Footer */}
