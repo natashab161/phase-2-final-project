@@ -4,7 +4,7 @@ import React from "react";
 function FeaturedEvents() {
     return(
         <div>
-            <h2 className="featuredHeader">featured events from our top artists</h2>
+            <h2 className="featuredHeader"></h2>
             {/* <EventCard /> */}
         </div>
     )

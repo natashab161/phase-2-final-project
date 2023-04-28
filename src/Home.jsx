@@ -7,13 +7,10 @@ import EventsMap from "./EventsMap.jsx";
 function Home(){
     return(
         <div>
-            {/* <Slideshow /> */}
-            {/* <FeaturedEvents /> */}
             <Slideshow />
             <FeaturedEvents />
             <EventsPage />
             <EventsMap />
-            {/* Footer */}
         </div>
     )
 }

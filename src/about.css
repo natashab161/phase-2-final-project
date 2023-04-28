@@ -1,0 +1,16 @@
+.about-container {
+    max-width: 700px; /* Change this value to adjust the container width */
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: .7rem;
+    border: 1px solid #ffffff22;
+    background-color: #282C34;
+    background: linear-gradient(0deg, #e25a00aa 10%, #af3204c0 45%, #6a0039ab 100%);
+    box-shadow: 0 7px 20px 5px #07653c89;
+    backdrop-filter: blur(7px);
+    -webkit-backdrop-filter: blur(7px);
+  }
+  
+  .about-text-container {
+    text-align: left;
+  }

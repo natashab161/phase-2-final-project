@@ -18,6 +18,8 @@ import './ProfilePage.css';
 import { app, auth } from './Firebase';
 import UserInfo from './UserInfo';
 import EditDisplayName from './EditDisplayName';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faGithub, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
 
 const storage = getStorage(app);
 const db = getFirestore(app);
@@ -100,10 +102,31 @@ function ProfilePage() {
       <EditDisplayName user={currentUser} />
 
       {/* <UserInfo user={currentUser} /> */}
-      <div className="profile-info">
+      <div className="profile-details">
+        <div className="profile-info">
         <img src={url} alt="profile" className="profile-picture" />
         <input type="file" onChange={handleChange} />
         <button onClick={handleUpload}>Upload Profile Picture</button>
+      </div>
+      <div className="user-info">
+        <p>developer, animator, artist, writer</p>
+        <p>based in 📍 <i>New York City</i></p>
+        <h4>connect .</h4>
+  <p>
+  <span className='connect-icons'><a href="http://github.com/jolieschae">
+  <FontAwesomeIcon icon={faGithub} size="lg" style={{color: "#a2579c"}} />
+  </a></span>
+  <span className='connect-icons'><a href="http://youtube.com">
+  <FontAwesomeIcon icon={faYoutube} size="lg" style={{color: "#a2579c"}} />
+  </a> </span>
+  <span className='connect-icons'><a href="http://linkedin.com">
+  <FontAwesomeIcon icon={faLinkedin} size="lg" style={{color: "#a2579c"}}/>
+  </a> </span>
+  <span className='connect-icons'><a href="http://instagram.com/jolieschae/?hl=en">
+  <FontAwesomeIcon icon={faInstagram} size="lg" style={{color: "#a2579c"}} />
+  </a></span>
+</p>
+      </div>
       </div>
       <div className="bio-section">
         <h3>Bio</h3>
@@ -114,7 +137,7 @@ function ProfilePage() {
           rows="5"
           cols="30"
         ></textarea>
-        <button onClick={updateBio}>Update Bio</button>
+        <button className="bio-input-button" onClick={updateBio}>Update Bio</button>
       </div>
     </div>
   );

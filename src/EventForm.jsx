@@ -70,7 +70,7 @@ function EventForm({ eventSubmit }) {
   return (
     <div className="eventFormContainer">
       <h1>publish your event</h1>
-      <form onSubmit={handleEventSubmit}>
+      <form className="eventForm"onSubmit={handleEventSubmit}>
         <h2>title your event</h2>
         <input
           className="eventFormInput"
