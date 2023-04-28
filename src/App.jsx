@@ -56,6 +56,9 @@ function App() {
           <li>
             <Link to="/Create">create</Link>
           </li>
+          <li>
+            <Link to="/Login">login</Link>
+          </li>
         </ul>
       </nav>
       <Routes>
@@ -70,8 +73,10 @@ function App() {
         <Route path="/PersonalPhotos" element={user ? <PersonalPhotos user={user} /> : <FirebaseAuth />} />
         <Route path="/UploadPhotoForm" element={<UploadPhotoForm />} />
         <Route path="/EventsMap" element={<EventsMap />} />
+        <Route path="/Login" element={<FirebaseAuth />} />
       </Routes>
       <GoogleAnalytics />
+
       <UserStatus />
 
       
