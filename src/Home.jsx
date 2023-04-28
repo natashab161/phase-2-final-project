@@ -8,12 +8,11 @@ import EventsMap from "./EventsMap.jsx";
 function Home(){
     return(
         <div>
-            <Slideshow />
-            <FeaturedEvents />
-            <SearchEvents />
+            {/* <Slideshow /> */}
+            {/* <FeaturedEvents /> */}
+            {/* <SearchEvents /> */}
             <EventsPage />
             <EventsMap />
-            {/* <EventsMap /> */}
             {/* Footer */}
         </div>
     )
