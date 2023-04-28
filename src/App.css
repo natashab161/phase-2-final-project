@@ -45,10 +45,9 @@ body {
 }
 
 .slideshow {
-  margin: 0 auto;
+  margin: 5px ;
   overflow: hidden;
   max-width: 100%;
-  width: 100%;
 }
 
 .slideshowSlider {
