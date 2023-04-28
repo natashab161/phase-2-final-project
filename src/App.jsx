@@ -58,7 +58,6 @@ function App() {
           </li>
         </ul>
       </nav>
-      <UserStatus />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Community" element={<Community />} />
@@ -73,6 +72,8 @@ function App() {
         <Route path="/EventsMap" element={<EventsMap />} />
       </Routes>
       <GoogleAnalytics />
+      <UserStatus />
+
       
     </div>
   );
