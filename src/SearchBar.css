@@ -27,7 +27,6 @@ input[type="text"]::placeholder {
 
 #cover {
   position: relative;
-  width: 550px;
   padding: 37px;
   background-color: #ff8511;
   border-radius: 10px;

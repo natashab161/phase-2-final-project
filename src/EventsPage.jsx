@@ -71,17 +71,38 @@ function EventsPage() {
 
   return (
     <div>
-      <div className="searchContainer">
-        <input type="text" placeholder="Search events" onChange={handleSearch} />
+
+      <div id="cover">
+        <form className="searchbar">
+          <div className="searchOuterCell">
+            <div className="td">
+              <input 
+                type="text" 
+                placeholder="Search events" 
+                onChange={handleSearch} 
+              />
+            </div>
+            <div className="td" id="s-cover">
+              <button classname="searchSubmitButton" type="submit">
+                <div id="s-circle"></div>
+                <span></span>
+              </button>
+            </div>
+          </div>
+        </form>
       </div>
+
+
       <div className="eventsContainer">
         {renderEventCards.slice(startIndex, startIndex + 6)}
       </div>
+
       <div className="button-container">
         {startIndex > 0 && <button class="pageButton" onClick={handlePrevClick}>Prev</button>}
         {startIndex + 6 < renderEventCards.length && (
           <button className="pageButton" onClick={handleNextClick}>Next</button>)}
       </div>
+
     </div>
   );
 }
