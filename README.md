@@ -1,6 +1,6 @@
 #PullUp
 
- This is the first iteration of our application, pullUp
+ This is the first iteration of our application, slide
 
 
 

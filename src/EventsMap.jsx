@@ -196,7 +196,7 @@ const json = {
         "tickets": "ticket-link.com",
         "share": "share-link.com",
         "images": ["https://imgur.com/pUeOGIA.jpg", "https://imgur.com/IeqQT4v.jpg", "https://imgur.com/gRVPOXc.jpg"],
-        "description": "PULL UP on me and this ~talented~ troupe of dumbass comedians. We'll take the stage and whip up a series of unscripted scenes and characters based solely on audience suggestions. You never know what kind of wacky situations we'll come up with, we sure don't, but we guarantee it will be side-splittingly funny. Our performances are fast-paced, interactive, and always unpredictable. Find yourself swept up in a musical number, caught in the middle of a bizarre love triangle, or watching a group of superheroes saving the world in the most ridiculous way possible. Grab your friends, grab your mom, your cat, bring a g-ddamn sense of humor, and get ready for a night you won't forget.",
+        "description": "slide on me and this ~talented~ troupe of dumbass comedians. We'll take the stage and whip up a series of unscripted scenes and characters based solely on audience suggestions. You never know what kind of wacky situations we'll come up with, we sure don't, but we guarantee it will be side-splittingly funny. Our performances are fast-paced, interactive, and always unpredictable. Find yourself swept up in a musical number, caught in the middle of a bizarre love triangle, or watching a group of superheroes saving the world in the most ridiculous way possible. Grab your friends, grab your mom, your cat, bring a g-ddamn sense of humor, and get ready for a night you won't forget.",
         "age": "18+",
         "category": "Comedy",
         "subcategory": "shows",
