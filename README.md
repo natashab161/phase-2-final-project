@@ -1,12 +1,4 @@
-#PullUp
-
- This is the first iteration of our application, slide
-
-
-
-
-
-
+This is the first iteration of our application, slide, an event hosting platform powered by artists and machine learning
 
 ## Getting Started with Create React App
 
