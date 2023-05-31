@@ -51,7 +51,7 @@ function EventForm({ eventSubmit }) {
       tags: tags,
     };
 
-    fetch('/eventsdata.json', {
+    fetch('https://pullupnyc-default-rtdb.firebaseio.com/events.json', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

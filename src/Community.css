@@ -1,0 +1,50 @@
+.community {
+    font-family: Arial, sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+  }
+  
+  .community-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 30px;
+    color: #4a4a4a;
+  }
+  
+  .section-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin: 30px 0 20px;
+    color: #333;
+  }
+  
+  .feature-list,
+  .scaling-ideas-list,
+  .resource-list,
+  .learn-more-list {
+    padding-left: 20px;
+    list-style-type: none;
+  }
+  
+  .feature-list li,
+  .scaling-ideas-list li,
+  .resource-list li,
+  .learn-more-list li {
+    position: relative;
+    margin-bottom: 20px;
+    font-weight: bold;
+  }
+  
+  .resource-list a,
+  .learn-more-list a {
+    color: #007bff;
+    text-decoration: none;
+  }
+  
+  .resource-list a:hover,
+  .learn-more-list a:hover {
+    text-decoration: underline;
+  }
+  

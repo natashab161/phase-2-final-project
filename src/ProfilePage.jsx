@@ -20,6 +20,9 @@ import UserInfo from './UserInfo';
 import EditDisplayName from './EditDisplayName';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faGithub, faInstagram, faLinkedin, faYoutube } from '@fortawesome/free-brands-svg-icons';
+import PersonalPhotos from './PersonalPhotos';
+import VideoUploadForm from './VideoUploadForm';
+import PhotoGallery from './PhotoGallery';
 
 const storage = getStorage(app);
 const db = getFirestore(app);
@@ -139,6 +142,9 @@ function ProfilePage() {
         ></textarea>
         <button className="bio-input-button" onClick={updateBio}>Update Bio</button>
       </div>
+      <PhotoGallery />
+      <PersonalPhotos />
+      <VideoUploadForm />
     </div>
   );
 }

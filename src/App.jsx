@@ -74,7 +74,7 @@ function App() {
         <Route path="/ProfilePage" element={<ProfilePage />} />
         <Route path="/PhotoGallery" element={<PhotoGallery />} />
         <Route path="/VideoUploadForm" element={<VideoUploadForm />} />
-        <Route path="/PersonalPhotos" element={user ? <PersonalPhotos user={user} /> : <FirebaseAuth />} />
+        <Route path="/PersonalPhotos" element={<PersonalPhotos user={user} />} />
         <Route path="/UploadPhotoForm" element={<UploadPhotoForm />} />
         <Route path="/EventsMap" element={<EventsMap />} />
         <Route path="/Login" element={<FirebaseAuth />} />
