@@ -3,7 +3,12 @@
 
 🎨 This is the first iteration protype of our application dedicated to empowering artists by giving them a space to advertise their events and connect with those who have creative careers. 
 
-👉🏽 This project was built in five days by three Flatiron Bootcamp students, after only 1 week of learning react!
+👉🏽 This project was built on a tight 4 day deadline by 3 Flatiron Bootcamp students, after only 1 week of learning React!
+
+### Contributors
+    [Natasha Bartley] (https://github.com/natashabartley)
+    [Jolie Schae] (https://github.com/jolieschae)
+    [Matt McFarlane] (https://github.com/matthewrobertmac)
 
 to get started, make sure you have node installed and run 
 
