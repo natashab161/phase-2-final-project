@@ -1,4 +1,3 @@
-This is the first iteration of our application, slide, an event hosting platform powered by artists and machine learning
 
 ## Intro
 
